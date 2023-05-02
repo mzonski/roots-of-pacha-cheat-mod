@@ -7,12 +7,12 @@ using BuildInfo = RootsOfPachaCheatMod.BuildInfo;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RootsOfPachaCheatMod")]
+[assembly: AssemblyTitle(BuildInfo.Name)]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("RootsOfPachaCheatMod")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyCopyright($"Copyright © {BuildInfo.Author} 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,8 +34,8 @@ using BuildInfo = RootsOfPachaCheatMod.BuildInfo;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.8.2")]
-[assembly: AssemblyFileVersion("1.0.8.2")]
+[assembly: AssemblyVersion(BuildInfo.Version)]
+[assembly: AssemblyFileVersion(BuildInfo.Version)]
 
 [assembly: MelonInfo(typeof(CheatMod), BuildInfo.Name, BuildInfo.Version, BuildInfo.Author)]
 [assembly: MelonColor]

@@ -1,5 +1,7 @@
 # Roots of Pacha Cheat Mod
 
+![Cheat menu image](.github/CheatMod-ingame.png "Cheat menu image")
+
 This repository contains a cheat mod for Roots of Pacha game that can be used to enhance your gaming experience. Follow the steps below to install and use this mod:
 
 ## Prerequisites
@@ -21,8 +23,12 @@ This repository contains a cheat mod for Roots of Pacha game that can be used to
 - Infinite stamina
 - Forcefully cover tiles with stones/grass/sticks
 - Intros can be skipped faster (not done yet tho)
+- Freeze time
+- Player speedhack
 
 ## Keys
-F1  - Open cheat menu
-F2  - Add charisma buf for a day
-F12 - Plant grass/rocks/trees over tiles (massive, be careful!)
+| Key | Function |
+| --- | --- |
+| F1  | Open cheat menu |
+| F2  | Add charisma buff for a day |
+| F12 | Plant grass/rocks/trees over tiles (massive, be careful!) |
