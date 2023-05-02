@@ -9,7 +9,7 @@ public partial class CheatMod
     [HarmonyPatch(typeof(PlayerStateController), "MaxSpeed", MethodType.Getter)]
     private class PlayerStateMaxSpeedPatch
     {
-        public static bool Prefix(PlayerStateController __instance, ref float? __result)
+        private static bool Prefix(PlayerStateController __instance, ref float? __result)
         {
             if (!_pachaManager.Config.IsMovementSpeedEnabled) return true;
             __result = 100f;
@@ -20,7 +20,7 @@ public partial class CheatMod
     [HarmonyPatch(typeof(PlayerStateController), "Speed", MethodType.Getter)]
     private class PlayerStateSpeedPatch
     {
-        public static bool Prefix(PlayerStateController __instance, ref float __result)
+        private static bool Prefix(PlayerStateController __instance, ref float __result)
         {
             if (!_pachaManager.Config.IsMovementSpeedEnabled) return true;
             __result = _pachaManager.Config.PlayerMovementSpeed;

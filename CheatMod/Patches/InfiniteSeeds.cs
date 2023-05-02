@@ -7,7 +7,7 @@ public partial class CheatMod
     [HarmonyPatch(typeof(SeedInventoryEntity), "RemoveItem")]
     private class InfiniteSeedsPatch
     {
-        public static bool Prefix()
+        private static bool Prefix()
         {
             return !_pachaManager.Config.IsInfiniteSeedsEnabled;
         }

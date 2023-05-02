@@ -6,9 +6,9 @@ namespace RootsOfPachaCheatMod;
 public partial class CheatMod
 {
     [HarmonyPatch(typeof(Session), "AdvanceTime")]
-    class FreezeTimePatch
+    private class FreezeTimePatch
     {
-        static bool Prefix()
+        private static bool Prefix()
         {
             return !_pachaManager.Config.IsFreezeTimeEnabled;
         }

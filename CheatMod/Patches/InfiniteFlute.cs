@@ -8,7 +8,7 @@ public partial class CheatMod
     [HarmonyPatch(typeof(FluteToolItem), "Use")]
     private class InfiniteFlutePatch
     {
-        public static bool Prefix(FluteToolItem __instance, PlayerEntity player, InventoryEntity entity,
+        private static bool Prefix(FluteToolItem __instance, PlayerEntity player, InventoryEntity entity,
             float stamina)
         {
             if (_pachaManager.Config.IsInfiniteFluteEnabled)

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RootsOfPachaCheatMod", "RootsOfPachaCheatMod.csproj", "{483625D8-E267-4A6F-BA7B-A5E37251FB2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RootsOfPachaCheatMod", "CheatMod\RootsOfPachaCheatMod.csproj", "{483625D8-E267-4A6F-BA7B-A5E37251FB2C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{5729F893-5968-49A1-B9A1-7296B99C6BB2}"
 	ProjectSection(SolutionItems) = preProject

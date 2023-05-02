@@ -7,7 +7,7 @@ public partial class CheatMod
     [HarmonyPatch(typeof(WaterToolItem), "Use")]
     private class InfiniteWaterToolPatch
     {
-        public static bool Prefix(WaterToolItem __instance, PlayerEntity player, InventoryEntity entity,
+        private static bool Prefix(WaterToolItem __instance, PlayerEntity player, InventoryEntity entity,
             float stamina)
         {
             if (_pachaManager.Config.IsInfiniteWaterToolEnabled)
