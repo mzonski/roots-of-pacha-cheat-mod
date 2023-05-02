@@ -6,10 +6,13 @@ namespace RootsOfPachaCheatMod.UI.Windows;
 
 public class ItemSpawnerWindow : PachaCheatWindow
 {
+    private Rect _itemSpawnerWindow = new(220, 16, 400, 520);
+
+    private bool _isFirstRender;
     private GUIContent[] _currentListItems = Array.Empty<GUIContent>();
     private int _selectedItemId = -1;
     private int _itemQty = 1;
-    private string _itemsFilterBy = "poop";
+    private string _itemsFilterBy = string.Empty;
     private Vector2 _scrollPosition = Vector2.zero;
 
     private string ItemsFilterBy
@@ -27,8 +30,14 @@ public class ItemSpawnerWindow : PachaCheatWindow
     {
     }
 
-    public override void Draw(int windowId)
+    public override void DrawInternal(int windowId)
     {
+        if (_isFirstRender == false)
+        {
+            ItemsFilterBy = "poop";
+            _isFirstRender = true;
+        }
+
         GUILayout.BeginVertical();
 
         GUILayout.BeginHorizontal();
@@ -65,6 +74,13 @@ public class ItemSpawnerWindow : PachaCheatWindow
         GUILayout.EndVertical();
 
         GUI.DragWindow();
+    }
+
+    public override void Draw()
+    {
+        if (Manager.Config.ItemSpawnerWindowOpen)
+            _itemSpawnerWindow = GUILayout.Window((int)CheatWindowType.ItemSpawner, _itemSpawnerWindow, DrawInternal,
+                "Pacha Item Spawner");
     }
 
 

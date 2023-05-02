@@ -82,6 +82,7 @@
         <Compile Include="Patches\InfiniteSeeds.cs" />
         <Compile Include="Patches\InfiniteStamina.cs" />
         <Compile Include="Patches\InfiniteWaterTool.cs" />
+        <Compile Include="Patches\PlayerSpeed.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="CheatMod.cs" />
         <Compile Include="UI\Base\PachaCheatWindow.cs" />
@@ -90,6 +91,7 @@
         <Compile Include="UI\PachaCheatUI.cs" />
         <Compile Include="UI\Windows\ItemSpawnerWindow.cs" />
         <Compile Include="UI\Windows\MainWindow.cs" />
+        <Compile Include="UI\Windows\PlayerStatsWindow.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

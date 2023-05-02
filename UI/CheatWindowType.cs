@@ -1,7 +1,8 @@
 ﻿namespace RootsOfPachaCheatMod.UI;
 
-public enum CheatWindowType : int
+public enum CheatWindowType
 {
     Main = 0,
-    ItemSpawner = 1
+    ItemSpawner = 1,
+    PlayerStats = 2,
 }

@@ -1,12 +1,14 @@
-﻿namespace RootsOfPachaCheatMod.UI.Windows;
+﻿namespace RootsOfPachaCheatMod.UI;
 
 public abstract class PachaCheatWindow
 {
     protected readonly PachaManager Manager;
 
-    public PachaCheatWindow(PachaManager manager)
+    protected PachaCheatWindow(PachaManager manager)
     {
         Manager = manager;
     }
-    public abstract void Draw(int windowId);
+    public abstract void DrawInternal(int windowId);
+    
+    public abstract void Draw();
 }

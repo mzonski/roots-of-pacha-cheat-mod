@@ -4,6 +4,8 @@ namespace RootsOfPachaCheatMod.UI.Windows;
 
 public class MainWindow : PachaCheatWindow
 {
+    private Rect _windowRect = new(16, 16, 200, 300);
+
     public MainWindow(PachaManager manager) : base(manager)
     {
     }
@@ -20,7 +22,7 @@ public class MainWindow : PachaCheatWindow
         Manager.Config.ItemSpawnerWindowOpen = true;
     }
 
-    public override void Draw(int windowId)
+    public override void DrawInternal(int windowId)
     {
         var config = Manager.Config;
         GUILayout.BeginVertical();
@@ -37,6 +39,8 @@ public class MainWindow : PachaCheatWindow
             CheatUIStyles.Toggle);
         config.IsFreezeTimeEnabled = GUILayout.Toggle(config.IsFreezeTimeEnabled, "Freeze time",
             CheatUIStyles.Toggle);
+        config.IsMovementSpeedEnabled = GUILayout.Toggle(config.IsMovementSpeedEnabled, "Enable player speedhack",
+            CheatUIStyles.Toggle);
 
         GUILayout.Space(20);
 
@@ -50,5 +54,10 @@ public class MainWindow : PachaCheatWindow
         GUILayout.EndVertical();
 
         GUI.DragWindow();
+    }
+
+    public override void Draw()
+    {
+        _windowRect = GUILayout.Window((int)CheatWindowType.Main, _windowRect, DrawInternal, "Pacha Cheat");
     }
 }
