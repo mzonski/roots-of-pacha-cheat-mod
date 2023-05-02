@@ -17,11 +17,9 @@ public class ItemSpawnerWindow : PachaCheatWindow
         get => _itemsFilterBy;
         set
         {
-            if (!string.IsNullOrEmpty(value) && _itemsFilterBy != value)
-            {
-                _itemsFilterBy = value;
-                SetSelectedListItems();
-            }
+            if (string.IsNullOrEmpty(value) || _itemsFilterBy == value) return;
+            _itemsFilterBy = value;
+            SetSelectedListItems();
         }
     }
 

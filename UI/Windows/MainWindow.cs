@@ -35,6 +35,8 @@ public class MainWindow : PachaCheatWindow
             GUILayout.Toggle(config.IsInfiniteStaminaEnabled, "Infinite stamina", CheatUIStyles.Toggle);
         config.IsInfiniteWaterToolEnabled = GUILayout.Toggle(config.IsInfiniteWaterToolEnabled, "Infinite water tool",
             CheatUIStyles.Toggle);
+        config.IsFreezeTimeEnabled = GUILayout.Toggle(config.IsFreezeTimeEnabled, "Freeze time",
+            CheatUIStyles.Toggle);
 
         GUILayout.Space(20);
 

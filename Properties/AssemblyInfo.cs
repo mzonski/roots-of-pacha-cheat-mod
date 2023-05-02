@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using MelonLoader;
 using RootsOfPachaCheatMod;
-using BuildInfo = MelonLoader.BuildInfo;
+using BuildInfo = RootsOfPachaCheatMod.BuildInfo;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -34,8 +34,8 @@ using BuildInfo = MelonLoader.BuildInfo;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.8.2")]
+[assembly: AssemblyFileVersion("1.0.8.2")]
 
 [assembly: MelonInfo(typeof(CheatMod), BuildInfo.Name, BuildInfo.Version, BuildInfo.Author)]
 [assembly: MelonColor]

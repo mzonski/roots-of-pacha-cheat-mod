@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{5729F893-5
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3F930521-E380-408E-BB37-4F64212E042F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,8 @@ Global
 		{483625D8-E267-4A6F-BA7B-A5E37251FB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{483625D8-E267-4A6F-BA7B-A5E37251FB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{483625D8-E267-4A6F-BA7B-A5E37251FB2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{483625D8-E267-4A6F-BA7B-A5E37251FB2C} = {3F930521-E380-408E-BB37-4F64212E042F}
 	EndGlobalSection
 EndGlobal
