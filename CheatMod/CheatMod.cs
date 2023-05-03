@@ -25,6 +25,8 @@ public partial class CheatMod : MelonMod
         if (Input.GetKeyDown(KeyCode.F2)) PachaCheats.AddDayBuff(PlayerStatBuffType.Charisma, 5);
         
         if (Input.GetKeyDown(KeyCode.F3)) PachaUtils.GetPlayerCurrentCoords();
+        
+        if (Input.GetKeyDown(KeyCode.F4)) PachaCheats.GrowCrops();
     }
 
     public override void OnGUI()

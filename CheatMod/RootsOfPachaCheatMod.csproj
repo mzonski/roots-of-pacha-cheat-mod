@@ -55,6 +55,9 @@
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
         <Reference Include="System.Xml" />
+        <Reference Include="UniTask">
+          <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\UniTask.dll</HintPath>
+        </Reference>
         <Reference Include="UnityEngine">
           <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\UnityEngine.dll</HintPath>
         </Reference>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MelonLoader;
@@ -81,12 +82,91 @@ public static class PachaCheats
             dayTime.Value = time.Hours + time.Minutes / 60;
             offsetTimeField!.SetValue(session, 0f);
             dayStartTimeField!.SetValue(session, serverTimestamp);
-            
+
             MelonLogger.Msg($"Time set to: {time.Hours:00}:{time.Minutes:00}");
         }
         catch (Exception ex)
         {
             MelonLogger.Error("Couldn't set time due to " + ex.Message);
+        }
+    }
+
+    private static EntityManager RetrieveEntityManager()
+    {
+        var playerEntity = GameObject.FindObjectOfType<PlayerEntity>();
+        var entityManagerField =
+            typeof(PlayerEntity).GetField("EntityManager", BindingFlags.NonPublic | BindingFlags.Instance);
+        var entityManager = (EntityManager)entityManagerField?.GetValue(playerEntity);
+
+        if (entityManager == null)
+        {
+            MelonLogger.Error("Entity manager is null");
+        }
+
+        return entityManager;
+    }
+
+    private static void PatchPlantEntity(PlantEntity plantEntity)
+    {
+        var lastHarvestedProperty =
+            typeof(PlantEntity).GetProperty("LastHarvested", BindingFlags.NonPublic | BindingFlags.Instance);
+        var plantAgeProperty =
+            typeof(PlantEntity).GetProperty("Age", BindingFlags.NonPublic | BindingFlags.Instance);
+        var updateRendererMethod =
+            typeof(PlantEntity).GetMethod("UpdateRenderer", BindingFlags.NonPublic | BindingFlags.Instance);
+        var levelProperty =
+            typeof(PlantEntity).GetProperty("LevelWhenSpawnedOrLastHarvested", BindingFlags.NonPublic | BindingFlags.Instance);
+
+        if (lastHarvestedProperty == null || plantAgeProperty == null || updateRendererMethod == null || levelProperty == null)
+        {
+            throw new ArgumentNullException(nameof(PlantEntity),
+                "Plant entity data fields are initialized incorrectly");
+        }
+
+        levelProperty.SetValue(plantEntity, 2);
+        plantEntity.Withered = false;
+        lastHarvestedProperty.SetValue(plantEntity, null); // it allows to harvest plant in the same day but its glitched, not working
+        plantAgeProperty.SetValue(plantEntity, plantEntity.IsRepeating ? plantEntity.Plant.RepeatsEvery : 30f);
+
+
+        updateRendererMethod.Invoke(plantEntity, null);
+    }
+
+    public static void GrowCrops(float range = 3f)
+    {
+        try
+        {
+            MelonLogger.Msg("Grow crops");
+
+            var plantsInRange = new List<PlantEntity>();
+            var playerCoords = PachaUtils.GetPlayerCurrentCoords();
+            foreach (var entityData in Game.Current.Entities)
+            {
+                if (entityData.Type != EntityType.Plant) continue;
+
+                var plantData = (PlantData)entityData;
+
+                if (!plantData.Position.HasValue) continue;
+
+                var distanceFromPlayer = Vector2.Distance(playerCoords, plantData.Position.Value);
+
+                if (!(distanceFromPlayer < range)) continue;
+
+                var plantEntity = GuidManager.ResolveGuid(entityData.ID).GetComponent<PlantEntity>();
+                plantsInRange.Add(plantEntity);
+            }
+
+            MelonLogger.Msg($"[GrowCrops] Found {plantsInRange.Count} plants in range");
+
+            foreach (var plantEntity in plantsInRange)
+            {
+                PatchPlantEntity(plantEntity);
+            }
+        }
+        catch (Exception ex)
+        {
+            MelonLogger.Error("[GrowCrops] Failed: " + ex.Message);
+            MelonLogger.Msg(ex.StackTrace);
         }
     }
 }
