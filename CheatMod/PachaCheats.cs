@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using MelonLoader;
+using Photon.Pun;
 using SodaDen.Pacha;
+using UnityAtoms;
 using UnityEngine;
 
 namespace RootsOfPachaCheatMod;
@@ -51,8 +54,39 @@ public static class PachaCheats
                     Network.PlayerList.First(x => x.IsMasterClient), true);
                 wateredAmount++;
             }
+        }
 
-            MelonLogger.Msg($"Watered {wateredAmount} tiles");
+        MelonLogger.Msg($"Watered {wateredAmount} tiles");
+    }
+
+
+    public static void SetTime(TimeSpan time)
+    {
+        try
+        {
+            MelonLogger.Msg($"Trying to set {time.Hours:00}:{time.Minutes:00}");
+            var session = GameObject.FindObjectOfType<Session>();
+
+            var dayTimeField =
+                typeof(Session).GetField("DayTime", BindingFlags.NonPublic | BindingFlags.Instance);
+            var offsetTimeField =
+                typeof(Session).GetField("OffsetTime", BindingFlags.NonPublic | BindingFlags.Instance);
+            var dayStartTimeField =
+                typeof(Session).GetField("DayStartTime", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            var dayTime = (FloatVariable)dayTimeField.GetValue(session);
+
+            var serverTimestamp = PhotonNetwork.ServerTimestamp;
+
+            dayTime.Value = time.Hours + time.Minutes / 60;
+            offsetTimeField!.SetValue(session, 0f);
+            dayStartTimeField!.SetValue(session, serverTimestamp);
+            
+            MelonLogger.Msg($"Time set to: {time.Hours:00}:{time.Minutes:00}");
+        }
+        catch (Exception ex)
+        {
+            MelonLogger.Error("Couldn't set time due to " + ex.Message);
         }
     }
 }

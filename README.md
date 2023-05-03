@@ -22,8 +22,8 @@ This repository contains a cheat mod for Roots of Pacha game that can be used to
 - Infinite water tool
 - Infinite stamina
 - Forcefully cover tiles with stones/grass/sticks
-- Skip Disclaimer and intros
-- Freeze time
+- Skip disclaimer and intros
+- Time manager (freeze time, set time)
 - Player speedhack
 
 ## Keys

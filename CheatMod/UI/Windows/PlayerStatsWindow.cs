@@ -10,7 +10,7 @@ public class PlayerStatsWindow : PachaCheatWindow
     {
     }
 
-    public override void DrawInternal(int windowId)
+    protected override void DrawInternal(int windowId)
     {
         GUILayout.BeginVertical();
 

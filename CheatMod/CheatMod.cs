@@ -23,6 +23,8 @@ public partial class CheatMod : MelonMod
         if (Input.GetKeyDown(KeyCode.F1)) _pachaManager.Config.DrawUI = !_pachaManager.Config.DrawUI;
 
         if (Input.GetKeyDown(KeyCode.F2)) PachaCheats.AddDayBuff(PlayerStatBuffType.Charisma, 5);
+        
+        if (Input.GetKeyDown(KeyCode.F3)) PachaUtils.GetPlayerCurrentCoords();
     }
 
     public override void OnGUI()

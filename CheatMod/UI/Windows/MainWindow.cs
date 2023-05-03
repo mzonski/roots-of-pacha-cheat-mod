@@ -1,10 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace RootsOfPachaCheatMod.UI.Windows;
 
 public class MainWindow : PachaCheatWindow
 {
-    private Rect _windowRect = new(16, 16, 200, 300);
+    private Rect _windowRect = new(16, 16, 200, 350);
+
+    private readonly Action<bool> _waterAllTilesClickHandler = isClicked =>
+    {
+        if (!isClicked) return;
+
+        PachaCheats.WaterAllTilledTiles();
+    };
 
     public MainWindow(PachaManager manager) : base(manager)
     {
@@ -12,17 +20,28 @@ public class MainWindow : PachaCheatWindow
 
     private void HandleOpenItemSpawnerClick()
     {
-        if (Manager.Config.ItemSpawnerWindowOpen)
+        if (Manager.Config.DrawItemSpawnerWindow)
         {
-            Manager.Config.ItemSpawnerWindowOpen = false;
+            Manager.Config.DrawItemSpawnerWindow = false;
             return;
         }
 
         Manager.ItemDb.Refresh();
-        Manager.Config.ItemSpawnerWindowOpen = true;
+        Manager.Config.DrawItemSpawnerWindow = true;
     }
 
-    public override void DrawInternal(int windowId)
+    private void HandleOpenTimeManagerClick()
+    {
+        if (Manager.Config.DrawTimeManagerWindow)
+        {
+            Manager.Config.DrawTimeManagerWindow = false;
+            return;
+        }
+
+        Manager.Config.DrawTimeManagerWindow = true;
+    }
+
+    protected override void DrawInternal(int windowId)
     {
         var config = Manager.Config;
         GUILayout.BeginVertical();
@@ -37,19 +56,20 @@ public class MainWindow : PachaCheatWindow
             GUILayout.Toggle(config.IsInfiniteStaminaEnabled, "Infinite stamina", CheatUIStyles.Toggle);
         config.IsInfiniteWaterToolEnabled = GUILayout.Toggle(config.IsInfiniteWaterToolEnabled, "Infinite water tool",
             CheatUIStyles.Toggle);
-        config.IsFreezeTimeEnabled = GUILayout.Toggle(config.IsFreezeTimeEnabled, "Freeze time",
-            CheatUIStyles.Toggle);
-        config.IsMovementSpeedEnabled = GUILayout.Toggle(config.IsMovementSpeedEnabled, "Enable player speedhack",
+        config.IsMovementSpeedEnabled = GUILayout.Toggle(config.IsMovementSpeedEnabled, "Movement speedhack",
             CheatUIStyles.Toggle);
 
         GUILayout.Space(20);
 
-        if (GUILayout.Button("Water all crops")) PachaCheats.WaterAllTilledTiles();
+        _waterAllTilesClickHandler.Debounce()(GUILayout.Button("Water all crops"));
 
         GUILayout.FlexibleSpace();
 
-        if (GUILayout.Button(!config.ItemSpawnerWindowOpen ? "Open item spawner" : "Close item spawner"))
+        if (GUILayout.Button(!config.DrawItemSpawnerWindow ? "Open item spawner" : "Close item spawner"))
             HandleOpenItemSpawnerClick();
+
+        if (GUILayout.Button(!config.DrawTimeManagerWindow ? "Open time manager" : "Close time manager"))
+            HandleOpenTimeManagerClick();
 
         GUILayout.EndVertical();
 

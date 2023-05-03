@@ -30,7 +30,7 @@ public class ItemSpawnerWindow : PachaCheatWindow
     {
     }
 
-    public override void DrawInternal(int windowId)
+    protected override void DrawInternal(int windowId)
     {
         if (_isFirstRender == false)
         {
@@ -78,7 +78,7 @@ public class ItemSpawnerWindow : PachaCheatWindow
 
     public override void Draw()
     {
-        if (Manager.Config.ItemSpawnerWindowOpen)
+        if (Manager.Config.DrawItemSpawnerWindow)
             _itemSpawnerWindow = GUILayout.Window((int)CheatWindowType.ItemSpawner, _itemSpawnerWindow, DrawInternal,
                 "Pacha Item Spawner");
     }
