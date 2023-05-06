@@ -1,9 +1,10 @@
-﻿using MelonLoader;
-using RootsOfPachaCheatMod.UI;
+﻿using CheatMod.Core;
+using CheatMod.Core.UI;
+using MelonLoader;
 using SodaDen.Pacha;
 using UnityEngine;
 
-namespace RootsOfPachaCheatMod;
+namespace CheatMod.MelonLoader;
 
 public partial class CheatMod : MelonMod
 {
@@ -20,13 +21,13 @@ public partial class CheatMod : MelonMod
     {
         if (Input.GetKeyDown(KeyCode.F12)) PachaCheats.ForceRegenerateHittableResources();
 
-        if (Input.GetKeyDown(KeyCode.F1)) _pachaManager.Config.DrawUI = !_pachaManager.Config.DrawUI;
+        if (Input.GetKeyDown(KeyCode.F2)) _pachaManager.Config.DrawUI = !_pachaManager.Config.DrawUI;
 
-        if (Input.GetKeyDown(KeyCode.F2)) PachaCheats.AddDayBuff(PlayerStatBuffType.Charisma, 5);
+        if (Input.GetKeyDown(KeyCode.F3)) PachaCheats.AddDayBuff(PlayerStatBuffType.Charisma, 5);
         
-        if (Input.GetKeyDown(KeyCode.F3)) PachaUtils.GetPlayerCurrentCoords();
+        if (Input.GetKeyDown(KeyCode.F4)) PachaUtils.GetPlayerCurrentCoords();
         
-        if (Input.GetKeyDown(KeyCode.F4)) PachaCheats.GrowCrops();
+        if (Input.GetKeyDown(KeyCode.F5)) PachaCheats.GrowCrops();
     }
 
     public override void OnGUI()

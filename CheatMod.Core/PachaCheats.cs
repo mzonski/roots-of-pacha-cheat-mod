@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MelonLoader;
+//using MelonLoader;
 using Photon.Pun;
 using SodaDen.Pacha;
 using UnityAtoms;
 using UnityEngine;
 
-namespace RootsOfPachaCheatMod;
+namespace CheatMod.Core;
 
 public static class PachaCheats
 {
@@ -22,10 +22,11 @@ public static class PachaCheats
         else
             pen.Inventory.AddItem(it, qty);
 
-        MelonLogger.Msg($"Item {it.Name}[{it.ID}] added (x{qty})");
+        //MelonLogger.Msg($"Item {it.Name}[{it.ID}] added (x{qty})");
     }
 
     // Use it with caution. Generates a lot of stuff
+    // ReSharper disable Unity.PerformanceAnalysis
     public static void ForceRegenerateHittableResources()
     {
         var player = GameObject.FindObjectOfType<PlayerEntity>();
@@ -57,7 +58,7 @@ public static class PachaCheats
             }
         }
 
-        MelonLogger.Msg($"Watered {wateredAmount} tiles");
+        //MelonLogger.Msg($"Watered {wateredAmount} tiles");
     }
 
 
@@ -65,7 +66,7 @@ public static class PachaCheats
     {
         try
         {
-            MelonLogger.Msg($"Trying to set {time.Hours:00}:{time.Minutes:00}");
+            //MelonLogger.Msg($"Trying to set {time.Hours:00}:{time.Minutes:00}");
             var session = GameObject.FindObjectOfType<Session>();
 
             var dayTimeField =
@@ -83,11 +84,11 @@ public static class PachaCheats
             offsetTimeField!.SetValue(session, 0f);
             dayStartTimeField!.SetValue(session, serverTimestamp);
 
-            MelonLogger.Msg($"Time set to: {time.Hours:00}:{time.Minutes:00}");
+            //MelonLogger.Msg($"Time set to: {time.Hours:00}:{time.Minutes:00}");
         }
         catch (Exception ex)
         {
-            MelonLogger.Error("Couldn't set time due to " + ex.Message);
+            //MelonLogger.Error("Couldn't set time due to " + ex.Message);
         }
     }
 
@@ -100,7 +101,7 @@ public static class PachaCheats
 
         if (entityManager == null)
         {
-            MelonLogger.Error("Entity manager is null");
+            //MelonLogger.Error("Entity manager is null");
         }
 
         return entityManager;
@@ -136,7 +137,7 @@ public static class PachaCheats
     {
         try
         {
-            MelonLogger.Msg("Grow crops");
+            //MelonLogger.Msg("Grow crops");
 
             var plantsInRange = new List<PlantEntity>();
             var playerCoords = PachaUtils.GetPlayerCurrentCoords();
@@ -156,7 +157,7 @@ public static class PachaCheats
                 plantsInRange.Add(plantEntity);
             }
 
-            MelonLogger.Msg($"[GrowCrops] Found {plantsInRange.Count} plants in range");
+            //MelonLogger.Msg($"[GrowCrops] Found {plantsInRange.Count} plants in range");
 
             foreach (var plantEntity in plantsInRange)
             {
@@ -165,8 +166,8 @@ public static class PachaCheats
         }
         catch (Exception ex)
         {
-            MelonLogger.Error("[GrowCrops] Failed: " + ex.Message);
-            MelonLogger.Msg(ex.StackTrace);
+            //MelonLogger.Error("[GrowCrops] Failed: " + ex.Message);
+            //MelonLogger.Msg(ex.StackTrace);
         }
     }
 }

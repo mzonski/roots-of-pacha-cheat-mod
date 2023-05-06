@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
-using MelonLoader;
+using System.Reflection;
+//using MelonLoader;
 using SodaDen.Pacha;
+using SodaDen.Pacha.UI;
 using UnityEngine;
 
-namespace RootsOfPachaCheatMod;
+namespace CheatMod.Core;
 
 public static class PachaUtils
 {
@@ -11,8 +13,8 @@ public static class PachaUtils
     public static Vector2 GetPlayerCurrentCoords()
     {
         var player = GameObject.FindObjectOfType<PlayerEntity>();
-        MelonLogger.Msg(
-            $"[{player.Name}] x: {player.PlayerStateController.PositionWithDirection.x} y: {player.PlayerStateController.PositionWithDirection.y}");
+       // MelonLogger.Msg(
+       //     $"[{player.Name}] x: {player.PlayerStateController.PositionWithDirection.x} y: {player.PlayerStateController.PositionWithDirection.y}");
         return player.PlayerStateController.PositionWithDirection;
     }
 
@@ -45,16 +47,33 @@ public static class PachaUtils
             var typ = we.GetType();
             if (!types.Contains(typ.ToString())) types.Add(typ.ToString());
 
-            MelonLogger.Msg("Entity: " + we.name + " [-] " + we.ID + " [-] " + we.GetType());
+            //MelonLogger.Msg("Entity: " + we.name + " [-] " + we.ID + " [-] " + we.GetType());
         }
 
-        MelonLogger.Msg("Inventory items");
-        foreach (var inventoryItem in inventoryItems)
-            MelonLogger.Msg(inventoryItem.ID + "  " + inventoryItem.Name + "  " + inventoryItem.Description);
+        //MelonLogger.Msg("Inventory items");
+        //foreach (var inventoryItem in inventoryItems)
+        //    MelonLogger.Msg(inventoryItem.ID + "  " + inventoryItem.Name + "  " + inventoryItem.Description);
 
-        MelonLogger.Msg("All types");
-        foreach (var type in types) MelonLogger.Msg(type);
+        //MelonLogger.Msg("All types");
+        //foreach (var type in types) MelonLogger.Msg(type);
     }
+    
+    public static void SkipDisclaimerIntros()
+    {
+        var dsc = Object.FindObjectOfType<Disclaimer>();
+
+        if (dsc == null)
+        {
+            return;
+        }
+
+        dsc.OnAllLogos();
+        dsc.OnSplashEnded();
+
+        var currentIndexProperty = typeof(Disclaimer).GetProperty("CurrentIndex", BindingFlags.NonPublic | BindingFlags.Instance);
+        currentIndexProperty?.SetValue(dsc, 0);
+    }
+
 
     public static int NormalizeQty(int val)
     {

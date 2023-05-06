@@ -1,17 +1,15 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using CheatMod.Core;
-using MelonLoader;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle(CheatModBuildInfo.Name)]
+[assembly: AssemblyTitle("CheatMod.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CheatMod")]
-[assembly: AssemblyCopyright($"Copyright © {CheatModBuildInfo.Author} 2023")]
+[assembly: AssemblyProduct("CheatMod.Core")]
+[assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +19,7 @@ using MelonLoader;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("483625D8-E267-4A6F-BA7B-A5E37251FB2C")]
+[assembly: Guid("FEF26936-3AAB-408C-87E6-1F32CAF17D3A")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -33,10 +31,5 @@ using MelonLoader;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion(CheatModBuildInfo.Version)]
-[assembly: AssemblyFileVersion(CheatModBuildInfo.Version)]
-
-[assembly: MelonInfo(typeof(CheatMod.MelonLoader.CheatMod), CheatModBuildInfo.Name, CheatModBuildInfo.Version, CheatModBuildInfo.Author)]
-[assembly: MelonColor]
-
-[assembly: MelonGame("Soda Den", "Roots of Pacha")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

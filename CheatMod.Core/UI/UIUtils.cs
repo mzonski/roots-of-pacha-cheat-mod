@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RootsOfPachaCheatMod.UI;
+namespace CheatMod.Core.UI;
 
 public static class UIUtils
 {
@@ -14,7 +14,6 @@ public static class UIUtils
         {
             cancelTokenSource?.Cancel();
             cancelTokenSource = new CancellationTokenSource();
-
             Task.Delay(milliseconds, cancelTokenSource.Token)
                 .ContinueWith(t =>
                 {

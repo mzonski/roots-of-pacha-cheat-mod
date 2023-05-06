@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace RootsOfPachaCheatMod.UI;
+namespace CheatMod.Core.UI;
 
 public static class CheatUIStyles
 {

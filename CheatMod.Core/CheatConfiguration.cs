@@ -1,4 +1,4 @@
-﻿namespace RootsOfPachaCheatMod;
+﻿namespace CheatMod.Core;
 
 public class CheatConfiguration
 {

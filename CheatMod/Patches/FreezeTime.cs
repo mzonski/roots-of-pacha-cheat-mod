@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using SodaDen.Pacha;
 
-namespace RootsOfPachaCheatMod;
+namespace CheatMod.MelonLoader;
 
 public partial class CheatMod
 {

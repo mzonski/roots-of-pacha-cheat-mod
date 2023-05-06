@@ -2,7 +2,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace RootsOfPachaCheatMod;
+namespace CheatMod.MelonLoader;
 
 public partial class CheatMod
 {

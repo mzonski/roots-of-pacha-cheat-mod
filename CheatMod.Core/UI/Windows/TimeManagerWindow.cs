@@ -1,9 +1,9 @@
 ﻿using System;
-using RootsOfPachaCheatMod.Extensions;
+using CheatMod.Core.Extensions;
 using SodaDen.Pacha;
 using UnityEngine;
 
-namespace RootsOfPachaCheatMod.UI.Windows;
+namespace CheatMod.Core.UI.Windows;
 
 public class TimeManagerWindow : PachaCheatWindow
 {

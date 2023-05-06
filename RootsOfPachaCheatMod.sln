@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RootsOfPachaCheatMod", "CheatMod\RootsOfPachaCheatMod.csproj", "{483625D8-E267-4A6F-BA7B-A5E37251FB2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheatMod.MelonLoader", "CheatMod\CheatMod.MelonLoader.csproj", "{483625D8-E267-4A6F-BA7B-A5E37251FB2C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{5729F893-5968-49A1-B9A1-7296B99C6BB2}"
 	ProjectSection(SolutionItems) = preProject
@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{5729F893-5
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3F930521-E380-408E-BB37-4F64212E042F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheatMod.Core", "CheatMod.Core\CheatMod.Core.csproj", "{FEF26936-3AAB-408C-87E6-1F32CAF17D3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheatMod.BepInEx5", "CheatMod.BepInEx5\CheatMod.BepInEx5.csproj", "{E04654C4-EF56-43BE-B59E-0CBF89638135}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,8 +24,18 @@ Global
 		{483625D8-E267-4A6F-BA7B-A5E37251FB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{483625D8-E267-4A6F-BA7B-A5E37251FB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{483625D8-E267-4A6F-BA7B-A5E37251FB2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEF26936-3AAB-408C-87E6-1F32CAF17D3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF26936-3AAB-408C-87E6-1F32CAF17D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEF26936-3AAB-408C-87E6-1F32CAF17D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEF26936-3AAB-408C-87E6-1F32CAF17D3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E04654C4-EF56-43BE-B59E-0CBF89638135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E04654C4-EF56-43BE-B59E-0CBF89638135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E04654C4-EF56-43BE-B59E-0CBF89638135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E04654C4-EF56-43BE-B59E-0CBF89638135}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{483625D8-E267-4A6F-BA7B-A5E37251FB2C} = {3F930521-E380-408E-BB37-4F64212E042F}
+		{FEF26936-3AAB-408C-87E6-1F32CAF17D3A} = {3F930521-E380-408E-BB37-4F64212E042F}
+		{E04654C4-EF56-43BE-B59E-0CBF89638135} = {3F930521-E380-408E-BB37-4F64212E042F}
 	EndGlobalSection
 EndGlobal

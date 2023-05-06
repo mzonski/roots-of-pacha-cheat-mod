@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace RootsOfPachaCheatMod.UI.Windows;
+namespace CheatMod.Core.UI.Windows;
 
 public class MainWindow : PachaCheatWindow
 {
@@ -12,6 +12,13 @@ public class MainWindow : PachaCheatWindow
         if (!isClicked) return;
 
         PachaCheats.WaterAllTilledTiles();
+    };
+
+    private readonly Action<bool> _growCropsAroundClickHandler = isClicked =>
+    {
+        if (!isClicked) return;
+
+        PachaCheats.GrowCrops(9f);
     };
 
     public MainWindow(PachaManager manager) : base(manager)
@@ -62,6 +69,7 @@ public class MainWindow : PachaCheatWindow
         GUILayout.Space(20);
 
         _waterAllTilesClickHandler.Debounce()(GUILayout.Button("Water all crops"));
+        _growCropsAroundClickHandler.Debounce()(GUILayout.Button("Grow crops around"));
 
         GUILayout.FlexibleSpace();
 

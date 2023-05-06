@@ -1,6 +1,6 @@
-﻿namespace RootsOfPachaCheatMod;
+﻿namespace CheatMod.Core;
 
-public static class BuildInfo
+public static class CheatModBuildInfo
 {
     public const string Name = "Cheat mod";
     public const string Description = "Use it for your advantage";

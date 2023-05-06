@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using RootsOfPachaCheatMod.UI.Windows;
+using CheatMod.Core.UI.Windows;
 
-namespace RootsOfPachaCheatMod.UI;
+namespace CheatMod.Core.UI;
 
 public class PachaCheatUI
 {

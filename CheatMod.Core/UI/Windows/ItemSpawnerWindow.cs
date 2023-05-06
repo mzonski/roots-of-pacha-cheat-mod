@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Linq;
+using SodaDen.Pacha;
 using UnityEngine;
 
-namespace RootsOfPachaCheatMod.UI.Windows;
+namespace CheatMod.Core.UI.Windows;
 
 public class ItemSpawnerWindow : PachaCheatWindow
 {
     private Rect _itemSpawnerWindow = new(220, 16, 400, 520);
 
     private bool _isFirstRender;
-    private GUIContent[] _currentListItems = Array.Empty<GUIContent>();
+    private GUIContent[] _currentListItems = new GUIContent[0];
     private int _selectedItemId = -1;
     private int _itemQty = 1;
     private string _itemsFilterBy = string.Empty;
@@ -34,7 +35,7 @@ public class ItemSpawnerWindow : PachaCheatWindow
     {
         if (_isFirstRender == false)
         {
-            ItemsFilterBy = "poop";
+            ItemsFilterBy = "";
             _isFirstRender = true;
         }
 
@@ -67,7 +68,7 @@ public class ItemSpawnerWindow : PachaCheatWindow
         GUILayout.FlexibleSpace();
 
         if (_selectedItemId > -1)
-            if (GUILayout.Button("SPAWN"))
+            if (GUILayout.Button("Add to inventory"))
                 PachaCheats.AddItemToInventory(short.Parse(_currentListItems[_selectedItemId].tooltip), _itemQty);
 
 
@@ -89,8 +90,7 @@ public class ItemSpawnerWindow : PachaCheatWindow
         var filteredList = !string.IsNullOrEmpty(ItemsFilterBy)
             ? Manager.ItemDb.InventoryItems.Where(ii =>
                 ii.Name.ToLowerInvariant().Contains(ItemsFilterBy.ToLowerInvariant()))
-            : Manager.ItemDb.InventoryItems.Where(ii =>
-                ii.Name.ToLowerInvariant().Contains("poop"));
+            : Array.Empty<InventoryItem>();
 
         _currentListItems = filteredList.Select(ii => new GUIContent(ii.Name, ii.ID.ToString())).ToArray();
     }

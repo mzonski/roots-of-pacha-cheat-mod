@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RootsOfPachaCheatMod.Extensions;
+namespace CheatMod.Core.Extensions;
 
 public static class GuidExtensions
 {

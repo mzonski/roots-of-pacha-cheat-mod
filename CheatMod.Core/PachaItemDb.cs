@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using SodaDen.Pacha;
 
-namespace RootsOfPachaCheatMod;
+namespace CheatMod.Core;
 
 public class PachaItemDb
 {

@@ -2,7 +2,7 @@
 using SodaDen.Pacha.UI;
 using UnityEngine;
 
-namespace RootsOfPachaCheatMod;
+namespace CheatMod.MelonLoader;
 
 public partial class CheatMod
 {

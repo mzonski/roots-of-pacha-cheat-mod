@@ -1,4 +1,4 @@
-﻿namespace RootsOfPachaCheatMod.UI;
+﻿namespace CheatMod.Core.UI;
 
 public enum CheatWindowType
 {
