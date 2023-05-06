@@ -9,9 +9,9 @@ This repository contains a cheat mod for Roots of Pacha game that can be used to
 - [MelonLoader](https://github.com/LavaGang/MelonLoader) installed over Roots of Pacha game
 
 ## Installation
-1. Install [MelonLoader](https://github.com/LavaGang/MelonLoader)
-2. Download `RootsOfPachaCheatMod.dll` from the [release page](https://github.com/mzonski/roots-of-pacha-cheat-mod/releases)
-3. Copy `RootsOfPachaCheatMod.dll` from the output directory to the Roots of Pacha `Mods` directory.
+1. Install [MelonLoader](https://github.com/LavaGang/MelonLoader) or [BepInEx5](https://github.com/BepInEx/BepInEx/releases)
+2. Download `CheatMod.[InstalledModFramework].zip` from the [release page](https://github.com/mzonski/roots-of-pacha-cheat-mod/releases)
+3. Copy content from the output directory to the Roots of Pacha directory.
 4. Run the game and enjoy the new features!
 
 ## Features
@@ -25,10 +25,12 @@ This repository contains a cheat mod for Roots of Pacha game that can be used to
 - Skip disclaimer and intros
 - Time manager (freeze time, set time)
 - Player speedhack
+- Insta grow crops (not working fully)
 
 ## Keys
-| Key | Function |
-| --- | --- |
-| F1  | Open cheat menu |
-| F2  | Add charisma buff for a day |
+| Key | Function                                                  |
+|-----|-----------------------------------------------------------|
+| F2  | Open cheat menu                                           |
+| F3  | Add 5 charisma for a day                                  |
+| F5  | Grow crops in 3f range                                    |
 | F12 | Plant grass/rocks/trees over tiles (massive, be careful!) |
