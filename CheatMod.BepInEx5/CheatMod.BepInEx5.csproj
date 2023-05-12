@@ -43,6 +43,11 @@
         <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
         <PackageReference Include="BepInEx.Core" Version="5.*" />
         <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+        <PackageReference Include="Fody" Version="6.7.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="ILMerge.Fody" Version="1.24.0" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
@@ -104,9 +109,16 @@
         </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="FodyWeavers.xml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="packages.config" />
+    </ItemGroup>
+
 
     <Target Name="AfterBuild">
         <Copy SourceFiles="$(TargetDir)\CheatMod.BepInEx5.dll" DestinationFolder="D:\Steam\steamapps\common\Roots of Pacha\BepInEx\plugins" />
-        <Copy SourceFiles="$(TargetDir)\CheatMod.Core.dll" DestinationFolder="D:\Steam\steamapps\common\Roots of Pacha\BepInEx\plugins" />
     </Target>
 </Project>

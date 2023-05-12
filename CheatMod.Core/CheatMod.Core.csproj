@@ -42,9 +42,6 @@
         <Reference Include="MamboJamboStudios.UnityAtomsCore.Runtime">
           <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\MamboJamboStudios.UnityAtomsCore.Runtime.dll</HintPath>
         </Reference>
-        <Reference Include="MelonLoader">
-          <HintPath>D:\Steam\steamapps\common\Roots of Pacha\MelonLoader\net35\MelonLoader.dll</HintPath>
-        </Reference>
         <Reference Include="Mono.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
           <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.dll</HintPath>
         </Reference>

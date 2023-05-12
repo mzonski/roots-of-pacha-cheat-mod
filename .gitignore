@@ -2,3 +2,5 @@
 packages/
 
 CheatMod/FodyWeavers.xsd
+
+CheatMod.BepInEx5/FodyWeavers.xsd
