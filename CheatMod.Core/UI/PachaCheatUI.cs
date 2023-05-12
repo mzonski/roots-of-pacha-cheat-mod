@@ -23,7 +23,7 @@ public class PachaCheatUI
 
     public void Draw()
     {
-        if (!_manager.Config.DrawUI)
+        if (!CheatOptions.DrawUI)
             return;
 
         foreach (var window in _windows.Values)

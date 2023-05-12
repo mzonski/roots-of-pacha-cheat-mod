@@ -26,7 +26,6 @@ public static class PachaCheats
     }
 
     // Use it with caution. Generates a lot of stuff
-    // ReSharper disable Unity.PerformanceAnalysis
     public static void ForceRegenerateHittableResources()
     {
         var player = GameObject.FindObjectOfType<PlayerEntity>();
@@ -116,9 +115,11 @@ public static class PachaCheats
         var updateRendererMethod =
             typeof(PlantEntity).GetMethod("UpdateRenderer", BindingFlags.NonPublic | BindingFlags.Instance);
         var levelProperty =
-            typeof(PlantEntity).GetProperty("LevelWhenSpawnedOrLastHarvested", BindingFlags.NonPublic | BindingFlags.Instance);
+            typeof(PlantEntity).GetProperty("LevelWhenSpawnedOrLastHarvested",
+                BindingFlags.NonPublic | BindingFlags.Instance);
 
-        if (lastHarvestedProperty == null || plantAgeProperty == null || updateRendererMethod == null || levelProperty == null)
+        if (lastHarvestedProperty == null || plantAgeProperty == null || updateRendererMethod == null ||
+            levelProperty == null)
         {
             throw new ArgumentNullException(nameof(PlantEntity),
                 "Plant entity data fields are initialized incorrectly");
@@ -126,7 +127,12 @@ public static class PachaCheats
 
         levelProperty.SetValue(plantEntity, 2);
         plantEntity.Withered = false;
-        lastHarvestedProperty.SetValue(plantEntity, null); // it allows to harvest plant in the same day but its glitched, not working
+        if (CheatOptions.IsInfiniteHarvestEnabled)
+        {
+            lastHarvestedProperty.SetValue(plantEntity,
+                null); // it allows to harvest plant in the same day but its glitched, not working
+        }
+
         plantAgeProperty.SetValue(plantEntity, plantEntity.IsRepeating ? plantEntity.Plant.RepeatsEvery : 30f);
 
 

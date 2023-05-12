@@ -1,27 +1,33 @@
-﻿using CheatMod.Core;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using CheatMod.Core;
+using CheatMod.Core.Patches;
 using CheatMod.Core.UI;
 using MelonLoader;
 using SodaDen.Pacha;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace CheatMod.MelonLoader;
 
-public partial class CheatMod : MelonMod
+public class CheatMod : MelonMod
 {
-    private static PachaManager _pachaManager;
     private static PachaCheatUI _cheatUI;
 
-    public CheatMod()
+    public override void OnInitializeMelon()
     {
-        _pachaManager = new PachaManager(new CheatConfiguration(), new PachaItemDb());
-        _cheatUI = new PachaCheatUI(_pachaManager);
+        var pachaManager = new PachaManager(new PachaItemDb());
+        _cheatUI = new PachaCheatUI(pachaManager);
+        
+        HarmonyInstance.PatchAll(typeof(CheatModPatches));
     }
 
     public override void OnUpdate()
     {
         if (Input.GetKeyDown(KeyCode.F12)) PachaCheats.ForceRegenerateHittableResources();
 
-        if (Input.GetKeyDown(KeyCode.F2)) _pachaManager.Config.DrawUI = !_pachaManager.Config.DrawUI;
+        if (Input.GetKeyDown(KeyCode.F2)) CheatOptions.DrawUI = !CheatOptions.DrawUI;
 
         if (Input.GetKeyDown(KeyCode.F3)) PachaCheats.AddDayBuff(PlayerStatBuffType.Charisma, 5);
         

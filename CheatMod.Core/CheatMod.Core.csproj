@@ -33,8 +33,8 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="0Harmony">
-          <HintPath>D:\Steam\steamapps\common\Roots of Pacha\MelonLoader\net35\0Harmony.dll</HintPath>
+        <Reference Include="0Harmony, Version=2.10.1.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\HarmonyX.2.10.1\lib\net45\0Harmony.dll</HintPath>
         </Reference>
         <Reference Include="Assembly-CSharp">
           <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\Assembly-CSharp.dll</HintPath>
@@ -44,6 +44,24 @@
         </Reference>
         <Reference Include="MelonLoader">
           <HintPath>D:\Steam\steamapps\common\Roots of Pacha\MelonLoader\net35\MelonLoader.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil.Mdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil.Pdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil.Rocks, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+        </Reference>
+        <Reference Include="MonoMod.RuntimeDetour, Version=22.3.23.4, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\MonoMod.RuntimeDetour.22.3.23.4\lib\net452\MonoMod.RuntimeDetour.dll</HintPath>
+        </Reference>
+        <Reference Include="MonoMod.Utils, Version=22.3.23.4, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\MonoMod.Utils.22.3.23.4\lib\net452\MonoMod.Utils.dll</HintPath>
         </Reference>
         <Reference Include="PhotonRealtime">
           <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\PhotonRealtime.dll</HintPath>
@@ -84,15 +102,24 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="CheatModBuildInfo.cs" />
-        <Compile Include="CheatConfiguration.cs" />
+        <Compile Include="BuildInfo.cs" />
+        <Compile Include="CheatOptions.cs" />
         <Compile Include="Extensions\GuidExtensions.cs" />
         <Compile Include="PachaCheats.cs" />
         <Compile Include="PachaItemDb.cs" />
         <Compile Include="PachaManager.cs" />
         <Compile Include="PachaUtils.cs" />
-        <Compile Include="Patches\EasyFishingPatch.cs" />
+        <Compile Include="Patches\EasyFishing.cs" />
+        <Compile Include="Patches\FreezeTime.cs" />
+        <Compile Include="Patches\InfiniteFlute.cs" />
+        <Compile Include="Patches\InfiniteHarvest.cs" />
+        <Compile Include="Patches\InfiniteSeeds.cs" />
+        <Compile Include="Patches\InfiniteStamina.cs" />
+        <Compile Include="Patches\InfiniteWaterTool.cs" />
+        <Compile Include="Patches\PlayerSpeed.cs" />
+        <Compile Include="Patches\SkipDisclaimer.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Services\ILogger.cs" />
         <Compile Include="UI\Base\PachaCheatWindow.cs" />
         <Compile Include="UI\CheatUIStyles.cs" />
         <Compile Include="UI\CheatWindowType.cs" />
@@ -102,6 +129,10 @@
         <Compile Include="UI\Windows\MainWindow.cs" />
         <Compile Include="UI\Windows\PlayerStatsWindow.cs" />
         <Compile Include="UI\Windows\TimeManagerWindow.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="App.config" />
+      <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

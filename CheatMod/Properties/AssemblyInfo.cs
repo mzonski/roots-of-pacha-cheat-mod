@@ -2,16 +2,17 @@
 using System.Runtime.InteropServices;
 using CheatMod.Core;
 using MelonLoader;
+using BuildInfo = CheatMod.Core.BuildInfo;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle(CheatModBuildInfo.Name)]
+[assembly: AssemblyTitle(BuildInfo.Name)]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("CheatMod")]
-[assembly: AssemblyCopyright($"Copyright © {CheatModBuildInfo.Author} 2023")]
+[assembly: AssemblyCopyright($"Copyright © {BuildInfo.Author} 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,10 +34,8 @@ using MelonLoader;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion(CheatModBuildInfo.Version)]
-[assembly: AssemblyFileVersion(CheatModBuildInfo.Version)]
+[assembly: AssemblyVersion(BuildInfo.Version)]
+[assembly: AssemblyFileVersion(BuildInfo.Version)]
 
-[assembly: MelonInfo(typeof(CheatMod.MelonLoader.CheatMod), CheatModBuildInfo.Name, CheatModBuildInfo.Version, CheatModBuildInfo.Author)]
-[assembly: MelonColor]
-
+[assembly: MelonInfo(typeof(CheatMod.MelonLoader.CheatMod), BuildInfo.Name, BuildInfo.Version, BuildInfo.Author)]
 [assembly: MelonGame("Soda Den", "Roots of Pacha")]

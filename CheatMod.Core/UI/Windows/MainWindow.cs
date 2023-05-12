@@ -27,43 +27,42 @@ public class MainWindow : PachaCheatWindow
 
     private void HandleOpenItemSpawnerClick()
     {
-        if (Manager.Config.DrawItemSpawnerWindow)
+        if (CheatOptions.DrawItemSpawnerWindow)
         {
-            Manager.Config.DrawItemSpawnerWindow = false;
+            CheatOptions.DrawItemSpawnerWindow = false;
             return;
         }
 
         Manager.ItemDb.Refresh();
-        Manager.Config.DrawItemSpawnerWindow = true;
+        CheatOptions.DrawItemSpawnerWindow = true;
     }
 
     private void HandleOpenTimeManagerClick()
     {
-        if (Manager.Config.DrawTimeManagerWindow)
+        if (CheatOptions.DrawTimeManagerWindow)
         {
-            Manager.Config.DrawTimeManagerWindow = false;
+            CheatOptions.DrawTimeManagerWindow = false;
             return;
         }
 
-        Manager.Config.DrawTimeManagerWindow = true;
+        CheatOptions.DrawTimeManagerWindow = true;
     }
 
     protected override void DrawInternal(int windowId)
     {
-        var config = Manager.Config;
         GUILayout.BeginVertical();
 
-        config.IsEasyFishingEnabled =
-            GUILayout.Toggle(config.IsEasyFishingEnabled, "Easy fishing", CheatUIStyles.Toggle);
-        config.IsInfiniteFluteEnabled =
-            GUILayout.Toggle(config.IsInfiniteFluteEnabled, "Infinite flute", CheatUIStyles.Toggle);
-        config.IsInfiniteSeedsEnabled =
-            GUILayout.Toggle(config.IsInfiniteSeedsEnabled, "Infinite seeds", CheatUIStyles.Toggle);
-        config.IsInfiniteStaminaEnabled =
-            GUILayout.Toggle(config.IsInfiniteStaminaEnabled, "Infinite stamina", CheatUIStyles.Toggle);
-        config.IsInfiniteWaterToolEnabled = GUILayout.Toggle(config.IsInfiniteWaterToolEnabled, "Infinite water tool",
+        CheatOptions.IsEasyFishingEnabled =
+            GUILayout.Toggle(CheatOptions.IsEasyFishingEnabled, "Easy fishing", CheatUIStyles.Toggle);
+        CheatOptions.IsInfiniteFluteEnabled =
+            GUILayout.Toggle(CheatOptions.IsInfiniteFluteEnabled, "Infinite flute", CheatUIStyles.Toggle);
+        CheatOptions.IsInfiniteSeedsEnabled =
+            GUILayout.Toggle(CheatOptions.IsInfiniteSeedsEnabled, "Infinite seeds", CheatUIStyles.Toggle);
+        CheatOptions.IsInfiniteStaminaEnabled =
+            GUILayout.Toggle(CheatOptions.IsInfiniteStaminaEnabled, "Infinite stamina", CheatUIStyles.Toggle);
+        CheatOptions.IsInfiniteWaterToolEnabled = GUILayout.Toggle(CheatOptions.IsInfiniteWaterToolEnabled, "Infinite water tool",
             CheatUIStyles.Toggle);
-        config.IsMovementSpeedEnabled = GUILayout.Toggle(config.IsMovementSpeedEnabled, "Movement speedhack",
+        CheatOptions.IsMovementSpeedEnabled = GUILayout.Toggle(CheatOptions.IsMovementSpeedEnabled, "Movement speedhack",
             CheatUIStyles.Toggle);
 
         GUILayout.Space(20);
@@ -73,10 +72,10 @@ public class MainWindow : PachaCheatWindow
 
         GUILayout.FlexibleSpace();
 
-        if (GUILayout.Button(!config.DrawItemSpawnerWindow ? "Open item spawner" : "Close item spawner"))
+        if (GUILayout.Button(!CheatOptions.DrawItemSpawnerWindow ? "Open item spawner" : "Close item spawner"))
             HandleOpenItemSpawnerClick();
 
-        if (GUILayout.Button(!config.DrawTimeManagerWindow ? "Open time manager" : "Close time manager"))
+        if (GUILayout.Button(!CheatOptions.DrawTimeManagerWindow ? "Open time manager" : "Close time manager"))
             HandleOpenTimeManagerClick();
 
         GUILayout.EndVertical();

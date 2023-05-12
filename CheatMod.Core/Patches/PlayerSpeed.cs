@@ -1,15 +1,15 @@
 ﻿using HarmonyLib;
 using SodaDen.Pacha;
 
-namespace CheatMod.BepInEx5;
+namespace CheatMod.Core.Patches;
 
-public partial class CheatMod
+public partial class CheatModPatches
 {
     [HarmonyPatch(typeof(PlayerStateController), "MaxSpeed", MethodType.Getter)]
     [HarmonyPrefix]
     private static bool PlayerStateMaxSpeedPatch(ref float? __result)
     {
-        if (!PachaManager.Config.IsMovementSpeedEnabled) return true;
+        if (!CheatOptions.IsMovementSpeedEnabled) return true;
         __result = 100f;
         return false;
     }
@@ -19,8 +19,8 @@ public partial class CheatMod
     [HarmonyPrefix]
     private static bool PlayerStateSpeedPatch(ref float __result)
     {
-        if (!PachaManager.Config.IsMovementSpeedEnabled) return true;
-        __result = PachaManager.Config.PlayerMovementSpeed;
+        if (!CheatOptions.IsMovementSpeedEnabled) return true;
+        __result = CheatOptions.PlayerMovementSpeed;
         return false;
     }
 }

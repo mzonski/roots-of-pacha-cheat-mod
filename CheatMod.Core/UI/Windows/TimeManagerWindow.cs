@@ -44,17 +44,17 @@ public class TimeManagerWindow : PachaCheatWindow
 
     public bool FreezeTimeEnabled
     {
-        get => Manager.Config.IsFreezeTimeEnabled;
+        get => CheatOptions.IsFreezeTimeEnabled;
         set
         {
-            if (Manager.Config.IsFreezeTimeEnabled && !value) // on disable
+            if (CheatOptions.IsFreezeTimeEnabled && !value) // on disable
             {
                 PachaCheats.SetTime(TimeSpan.FromHours(6));
             }
 
-            if (value != Manager.Config.IsFreezeTimeEnabled)
+            if (value != CheatOptions.IsFreezeTimeEnabled)
             {
-                Manager.Config.IsFreezeTimeEnabled = value;
+                CheatOptions.IsFreezeTimeEnabled = value;
             }
         }
     }
@@ -87,7 +87,7 @@ public class TimeManagerWindow : PachaCheatWindow
 
     public override void Draw()
     {
-        if (!Manager.Config.DrawTimeManagerWindow) return;
+        if (!CheatOptions.DrawTimeManagerWindow) return;
         _window = GUILayout.Window((int)CheatWindowType.TimeManager, _window, DrawInternal, "Pacha Time Manager");
     }
 }

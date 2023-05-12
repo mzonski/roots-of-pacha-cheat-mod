@@ -1,6 +1,6 @@
 ﻿namespace CheatMod.Core;
 
-public static class CheatModBuildInfo
+public static class BuildInfo
 {
     public const string Name = "Cheat mod";
     public const string Description = "Use it for your advantage";

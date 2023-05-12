@@ -1,15 +1,15 @@
 ﻿using HarmonyLib;
 using SodaDen.Pacha;
 
-namespace CheatMod.BepInEx5;
+namespace CheatMod.Core.Patches;
 
-public partial class CheatMod
+public partial class CheatModPatches
 {
     [HarmonyPatch(typeof(PlayerStateController), "CheckIfAllowedAction")]
     [HarmonyPrefix]
     private static bool InfiniteStaminaPatch(PlayerStateController __instance)
     {
-        if (PachaManager.Config.IsInfiniteStaminaEnabled)
+        if (CheatOptions.IsInfiniteStaminaEnabled)
             __instance.PlayerEntity.Stats.SetStamina(__instance.PlayerEntity.Stats.MaxStamina);
 
         return true;

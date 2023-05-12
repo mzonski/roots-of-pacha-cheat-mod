@@ -51,14 +51,6 @@
 
     <ItemGroup>
       <Compile Include="CheatMod.cs" />
-      <Compile Include="Patches\EasyFishing.cs" />
-      <Compile Include="Patches\FreezeTime.cs" />
-      <Compile Include="Patches\InfiniteFlute.cs" />
-      <Compile Include="Patches\InfiniteSeeds.cs" />
-      <Compile Include="Patches\InfiniteStamina.cs" />
-      <Compile Include="Patches\InfiniteWaterTool.cs" />
-      <Compile Include="Patches\PlayerSpeed.cs" />
-      <Compile Include="Patches\SkipDisclaimer.cs" />
     </ItemGroup>
 
     <ItemGroup>

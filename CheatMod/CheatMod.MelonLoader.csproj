@@ -78,14 +78,6 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Patches\EasyFishing.cs" />
-        <Compile Include="Patches\SkipDisclaimer.cs" />
-        <Compile Include="Patches\FreezeTime.cs" />
-        <Compile Include="Patches\InfiniteFlute.cs" />
-        <Compile Include="Patches\InfiniteSeeds.cs" />
-        <Compile Include="Patches\InfiniteStamina.cs" />
-        <Compile Include="Patches\InfiniteWaterTool.cs" />
-        <Compile Include="Patches\PlayerSpeed.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="CheatMod.cs" />
     </ItemGroup>
@@ -99,7 +91,7 @@
 
     <Target Name="AfterBuild">
         <Copy SourceFiles="$(TargetDir)\CheatMod.MelonLoader.dll" DestinationFolder="D:\Steam\steamapps\common\Roots of Pacha\Mods" />
-        <Copy SourceFiles="$(TargetDir)\CheatMod.Core.dll" DestinationFolder="D:\Steam\steamapps\common\Roots of Pacha\Mods" />
+        <!--<Copy SourceFiles="$(TargetDir)\CheatMod.Core.dll" DestinationFolder="D:\Steam\steamapps\common\Roots of Pacha\Mods" />-->
     </Target>
     
 </Project>

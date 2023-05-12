@@ -1,15 +1,15 @@
 ﻿using HarmonyLib;
 using SodaDen.Pacha;
 
-namespace CheatMod.BepInEx5;
+namespace CheatMod.Core.Patches;
 
-public partial class CheatMod
+public partial class CheatModPatches
 {
     [HarmonyPatch(typeof(FishingHitMode), "FocusRise", MethodType.Getter)]
     [HarmonyPrefix]
     private static bool EasyFishingPatch(ref float __result)
     {
-        if (!PachaManager.Config.IsEasyFishingEnabled) return true;
+        if (!CheatOptions.IsEasyFishingEnabled) return true;
         __result = 1000f;
         return false;
     }
