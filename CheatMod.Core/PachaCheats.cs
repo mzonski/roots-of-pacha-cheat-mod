@@ -172,6 +172,74 @@ public class PachaCheats
         }
     }
 
+    public void GrowTrees(float range = 3f)
+    {
+        try
+        {
+            _logger.Log("Grow trees");
+
+            var treesInRange = new List<TreeEntity>();
+            var playerCoords = GetPlayerCurrentCoords();
+            foreach (var entityData in Game.Current.Entities)
+            {
+                if (entityData.Type != EntityType.Tree) continue;
+
+                var treeData = (TreeData)entityData;
+
+                if (!treeData.Position.HasValue) continue;
+
+                var distanceFromPlayer = Vector2.Distance(playerCoords, treeData.Position.Value);
+
+                if (!(distanceFromPlayer < range)) continue;
+
+                var treeEntity = GuidManager.ResolveGuid(entityData.ID).GetComponent<TreeEntity>();
+                treesInRange.Add(treeEntity);
+            }
+
+            _logger.Log($"Found {treesInRange.Count} trees in range");
+
+            foreach (var treeEntity in treesInRange)
+            {
+                var ageField =
+                    typeof(TreeEntity).GetField("Age", BindingFlags.NonPublic | BindingFlags.Instance);
+                var healthField =
+                    typeof(TreeEntity).GetField("Health", BindingFlags.NonPublic | BindingFlags.Instance);
+                var treeRendererProperty =
+                    typeof(TreeEntity).GetProperty("TreeRenderer", BindingFlags.NonPublic | BindingFlags.Instance);
+                var currentDayProperty =
+                    typeof(TreeEntity).GetProperty("CurrentDay", BindingFlags.NonPublic | BindingFlags.Instance);
+
+                if (ageField == null || healthField == null || treeRendererProperty == null ||
+                    currentDayProperty == null)
+                {
+                    throw new ArgumentNullException(nameof(treeEntity),
+                        "Tree entity data fields are initialized incorrectly");
+                }
+                
+                var renderer = (TreeRenderer)treeRendererProperty.GetValue(treeEntity);
+                var healthComponent = (HealthComponent)healthField.GetValue(treeEntity);
+                var currentDay = (int)currentDayProperty.GetValue(treeEntity);
+
+                healthComponent.IncreaseHealth(treeEntity.Tree.StumpAtHealth + 1);
+                ageField.SetValue(treeEntity, (short)treeEntity.Tree.MatureAge);
+                _logger.Log("Current age: " + ageField.GetValue(treeEntity));
+
+                var currentSeason = new YearSeasonDay(currentDay).Season;
+                renderer.UpdateFromData(treeEntity.Tree, treeEntity.Tree.StageIndexAt(treeEntity.Tree.MatureAge),
+                    currentSeason, CheatOptions.IsInfiniteHarvestEnabled ? treeEntity.Tree.DaysInFlower + 1 : 0, false,
+                    true);
+
+                treeEntity.StartFlowerIn = 0;
+                treeEntity.LastFloweredIn = null;
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.Log("[GrowTrees] Failed: " + ex.Message);
+            _logger.Log(ex.StackTrace);
+        }
+    }
+
     // Get current standing tile = TilesManager.Instance.TileAt(GetPlayerCurrentCoords())
     public Vector2 GetPlayerCurrentCoords()
     {

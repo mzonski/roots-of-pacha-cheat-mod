@@ -5,9 +5,6 @@ namespace CheatMod.Core.UI.Windows;
 
 public class MainWindow : PachaCheatWindow
 {
-    private bool _isGrowCropsAroundClicked;
-
-    private bool _isWaterAllTilesClicked;
     private Rect _windowRect = new(16, 16, 200, 350);
 
 
@@ -15,9 +12,9 @@ public class MainWindow : PachaCheatWindow
     {
     }
 
+    private bool _isWaterAllTilesClicked;
     private bool IsWaterAllTilesClicked
     {
-        get => _isWaterAllTilesClicked;
         set
         {
             if (_isWaterAllTilesClicked == value) return;
@@ -27,15 +24,27 @@ public class MainWindow : PachaCheatWindow
         }
     }
 
+    private bool _isGrowCropsAroundClicked;
     private bool IsGrowCropsAroundClicked
     {
-        get => _isGrowCropsAroundClicked;
         set
         {
             if (_isGrowCropsAroundClicked == value) return;
             _isGrowCropsAroundClicked = value;
             if (value)
                 Manager.PachaCheats.GrowCrops(9f);
+        }
+    }
+    
+    private bool _isGrowTreesAroundClicked;
+    private bool IsGrowTreesAroundClicked
+    {
+        set
+        {
+            if (_isGrowTreesAroundClicked == value) return;
+            _isGrowTreesAroundClicked = value;
+            if (value)
+                Manager.PachaCheats.GrowTrees(9f);
         }
     }
 
@@ -85,6 +94,7 @@ public class MainWindow : PachaCheatWindow
 
         IsWaterAllTilesClicked = GUILayout.Button("Water all crops");
         IsGrowCropsAroundClicked = GUILayout.Button("Grow crops around");
+        IsGrowTreesAroundClicked = GUILayout.Button("Grow trees around");
 
         GUILayout.FlexibleSpace();
 

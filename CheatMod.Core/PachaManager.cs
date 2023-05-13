@@ -31,6 +31,8 @@ public class PachaManager
         if (Input.GetKeyDown(KeyCode.F4)) PachaCheats.GetPlayerCurrentCoords();
 
         if (Input.GetKeyDown(KeyCode.F5)) PachaCheats.GrowCrops();
+        
+        if (Input.GetKeyDown(KeyCode.F6)) PachaCheats.GrowTrees();
     }
 
     public void DrawGui()
