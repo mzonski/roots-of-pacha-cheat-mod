@@ -1,4 +1,4 @@
-﻿using CheatMod.Core.Services;
+using CheatMod.Core.Services;
 using CheatMod.Core.UI;
 using SodaDen.Pacha;
 using UnityEngine;
@@ -25,12 +25,12 @@ public class PachaManager
         if (Input.GetKeyDown(KeyCode.F2)) CheatOptions.DrawUI = !CheatOptions.DrawUI;
 
         if (Input.GetKeyDown(KeyCode.F3)) PachaCheats.AddDayBuff(PlayerStatBuffType.Charisma, 5);
-        
+
         if (Input.GetKeyDown(KeyCode.F4)) PachaCheats.GetPlayerCurrentCoords();
-        
+
         if (Input.GetKeyDown(KeyCode.F5)) PachaCheats.GrowCrops();
     }
-    
+
     public void DrawGui()
     {
         _cheatUI.Draw();

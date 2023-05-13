@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using CheatMod.Core;
 using MelonLoader;
 using BuildInfo = CheatMod.Core.BuildInfo;
 

@@ -12,7 +12,7 @@ public class PachaCheatUI
     public PachaCheatUI(PachaManager manager)
     {
         _manager = manager;
-        _windows = new Dictionary<CheatWindowType, PachaCheatWindow>()
+        _windows = new Dictionary<CheatWindowType, PachaCheatWindow>
         {
             { CheatWindowType.Main, new MainWindow(manager) },
             { CheatWindowType.ItemSpawner, new ItemSpawnerWindow(manager) },
@@ -26,9 +26,6 @@ public class PachaCheatUI
         if (!CheatOptions.DrawUI)
             return;
 
-        foreach (var window in _windows.Values)
-        {
-            window.Draw();
-        }
+        foreach (var window in _windows.Values) window.Draw();
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CheatMod.Core.Extensions;
 using SodaDen.Pacha;
 using UnityEngine;
@@ -7,12 +7,40 @@ namespace CheatMod.Core.UI.Windows;
 
 public class TimeManagerWindow : PachaCheatWindow
 {
+    private int _timeOffset = 420;
     private Rect _window = new(16, 430, 300, 90);
 
-    private int _timeOffset = 420;
-    public TimeSpan SelectedTime { get; set; } = TimeSpan.FromMinutes(420);
+    public TimeManagerWindow(PachaManager manager) : base(manager)
+    {
+    }
 
-    private void HandleSetTime()
+    private TimeSpan SelectedTime { get; set; } = TimeSpan.FromMinutes(420);
+
+    private int TimeOffset
+    {
+        get => _timeOffset;
+        set
+        {
+            if (value == _timeOffset) return;
+            _timeOffset = value;
+            // In Game the clock is starting from 6 o'clock
+            SelectedTime = TimeSpan.FromMinutes(value + 6 * 60);
+        }
+    }
+
+    private bool FreezeTimeEnabled
+    {
+        get => CheatOptions.IsFreezeTimeEnabled;
+        set
+        {
+            if (CheatOptions.IsFreezeTimeEnabled && !value) // on disable
+                Manager.PachaCheats.SetTime(TimeSpan.FromHours(6));
+
+            if (value != CheatOptions.IsFreezeTimeEnabled) CheatOptions.IsFreezeTimeEnabled = value;
+        }
+    }
+
+    private void SetInGameTime()
     {
         var nc = GameObject.FindObjectOfType<NotificationController>();
         nc.ShowNotification(new Notification
@@ -20,43 +48,8 @@ public class TimeManagerWindow : PachaCheatWindow
             ID = Guid.NewGuid().ToBase64String(),
             Description = $"Time set to: {SelectedTime.Hours:00}:{SelectedTime.Minutes:00}"
         });
-        
+
         Manager.PachaCheats.SetTime(SelectedTime);
-    }
-
-    public int TimeOffset
-    {
-        get => _timeOffset;
-        set
-        {
-            if (value != _timeOffset)
-            {
-                _timeOffset = value;
-                // In Game the clock is starting from 6 o'clock
-                SelectedTime = TimeSpan.FromMinutes(value + 6 * 60);
-            }
-        }
-    }
-
-    public TimeManagerWindow(PachaManager manager) : base(manager)
-    {
-    }
-
-    public bool FreezeTimeEnabled
-    {
-        get => CheatOptions.IsFreezeTimeEnabled;
-        set
-        {
-            if (CheatOptions.IsFreezeTimeEnabled && !value) // on disable
-            {
-                Manager.PachaCheats.SetTime(TimeSpan.FromHours(6));
-            }
-
-            if (value != CheatOptions.IsFreezeTimeEnabled)
-            {
-                CheatOptions.IsFreezeTimeEnabled = value;
-            }
-        }
     }
 
     protected override void DrawInternal(int windowId)
@@ -73,10 +66,7 @@ public class TimeManagerWindow : PachaCheatWindow
 
         GUILayout.Label($"Selected time: {timeString}");
 
-        if (FreezeTimeEnabled && GUILayout.Button("Set time"))
-        {
-            HandleSetTime();
-        }
+        if (FreezeTimeEnabled && GUILayout.Button("Set time")) SetInGameTime();
 
         FreezeTimeEnabled = GUILayout.Toggle(FreezeTimeEnabled, "Freeze time", CheatUIStyles.Toggle);
 

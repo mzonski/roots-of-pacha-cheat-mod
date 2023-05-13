@@ -1,14 +1,21 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace CheatMod.Core.UI.Windows;
 
 
 public class MainWindow : PachaCheatWindow
 {
-    private Rect _windowRect = new(16, 16, 200, 350);
+    private bool _isGrowCropsAroundClicked;
 
     private bool _isWaterAllTilesClicked;
-    public bool IsWaterAllTilesClicked
+    private Rect _windowRect = new(16, 16, 200, 350);
+
+
+    public MainWindow(PachaManager manager) : base(manager)
+    {
+    }
+
+    private bool IsWaterAllTilesClicked
     {
         get => _isWaterAllTilesClicked;
         set
@@ -17,11 +24,10 @@ public class MainWindow : PachaCheatWindow
             _isWaterAllTilesClicked = value;
             if (value)
                 Manager.PachaCheats.WaterAllTilledTiles();
-        } 
+        }
     }
 
-    private bool _isGrowCropsAroundClicked;
-    public bool IsGrowCropsAroundClicked 
+    private bool IsGrowCropsAroundClicked
     {
         get => _isGrowCropsAroundClicked;
         set
@@ -30,12 +36,7 @@ public class MainWindow : PachaCheatWindow
             _isGrowCropsAroundClicked = value;
             if (value)
                 Manager.PachaCheats.GrowCrops(9f);
-        } 
-    }
-
-
-    public MainWindow(PachaManager manager) : base(manager)
-    {
+        }
     }
 
     private void HandleOpenItemSpawnerClick()
@@ -73,10 +74,10 @@ public class MainWindow : PachaCheatWindow
             GUILayout.Toggle(CheatOptions.IsInfiniteSeedsEnabled, "Infinite seeds", CheatUIStyles.Toggle);
         CheatOptions.IsInfiniteStaminaEnabled =
             GUILayout.Toggle(CheatOptions.IsInfiniteStaminaEnabled, "Infinite stamina", CheatUIStyles.Toggle);
-        CheatOptions.IsInfiniteWaterToolEnabled = GUILayout.Toggle(CheatOptions.IsInfiniteWaterToolEnabled, "Infinite water tool",
-            CheatUIStyles.Toggle);
-        CheatOptions.IsMovementSpeedEnabled = GUILayout.Toggle(CheatOptions.IsMovementSpeedEnabled, "Movement speedhack",
-            CheatUIStyles.Toggle);
+        CheatOptions.IsInfiniteWaterToolEnabled = GUILayout.Toggle(CheatOptions.IsInfiniteWaterToolEnabled,
+            "Infinite water tool", CheatUIStyles.Toggle);
+        CheatOptions.IsMovementSpeedEnabled = GUILayout.Toggle(CheatOptions.IsMovementSpeedEnabled,
+            "Movement speedhack", CheatUIStyles.Toggle);
 
         GUILayout.Space(20);
 

@@ -27,6 +27,7 @@ public class PlayerStatsWindow : PachaCheatWindow
     public override void Draw()
     {
         if (CheatOptions.IsMovementSpeedEnabled)
-            _statsWindow = GUILayout.Window((int)CheatWindowType.PlayerStats, _statsWindow, DrawInternal, "Pacha Player Stats");
+            _statsWindow = GUILayout.Window((int)CheatWindowType.PlayerStats, _statsWindow, DrawInternal,
+                "Pacha Player Stats");
     }
 }

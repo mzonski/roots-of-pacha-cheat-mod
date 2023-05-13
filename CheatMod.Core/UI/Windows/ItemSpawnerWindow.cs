@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using SodaDen.Pacha;
 using UnityEngine;
@@ -7,14 +7,18 @@ namespace CheatMod.Core.UI.Windows;
 
 public class ItemSpawnerWindow : PachaCheatWindow
 {
-    private Rect _itemSpawnerWindow = new(220, 16, 400, 520);
+    private GUIContent[] _currentListItems = Array.Empty<GUIContent>();
 
     private bool _isFirstRender;
-    private GUIContent[] _currentListItems = Array.Empty<GUIContent>();
-    private int _selectedItemId = -1;
     private int _itemQty = 1;
     private string _itemsFilterBy = string.Empty;
+    private Rect _itemSpawnerWindow = new(220, 16, 400, 520);
     private Vector2 _scrollPosition = Vector2.zero;
+    private int _selectedItemId = -1;
+
+    public ItemSpawnerWindow(PachaManager manager) : base(manager)
+    {
+    }
 
     private string ItemsFilterBy
     {
@@ -25,10 +29,6 @@ public class ItemSpawnerWindow : PachaCheatWindow
             _itemsFilterBy = value;
             SetSelectedListItems();
         }
-    }
-
-    public ItemSpawnerWindow(PachaManager manager) : base(manager)
-    {
     }
 
     protected override void DrawInternal(int windowId)
@@ -71,7 +71,6 @@ public class ItemSpawnerWindow : PachaCheatWindow
             if (GUILayout.Button("Add to inventory"))
                 Manager.PachaCheats.AddItemToInventory(short.Parse(_currentListItems[_selectedItemId].tooltip), _itemQty);
 
-
         GUILayout.EndVertical();
 
         GUI.DragWindow();
@@ -83,7 +82,6 @@ public class ItemSpawnerWindow : PachaCheatWindow
             _itemSpawnerWindow = GUILayout.Window((int)CheatWindowType.ItemSpawner, _itemSpawnerWindow, DrawInternal,
                 "Pacha Item Spawner");
     }
-
 
     private void SetSelectedListItems()
     {

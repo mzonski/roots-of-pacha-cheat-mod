@@ -1,11 +1,11 @@
-﻿using BepInEx.Logging;
+using BepInEx.Logging;
 using CheatMod.Core.Services;
 
 namespace CheatMod.BepInEx5;
 
 public class ModLogger : IModLogger
 {
-    private ManualLogSource _logSource;
+    private readonly ManualLogSource _logSource;
 
     public ModLogger()
     {

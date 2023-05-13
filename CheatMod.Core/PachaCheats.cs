@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -55,14 +55,12 @@ public class PachaCheats
         var tiles = TilesManager.Instance.AllTiles;
         var wateredAmount = 0;
         foreach (var tile in tiles)
-        {
             if (tile is TillableTile { Stage: TillableStage.Tilled } tilledTile)
             {
                 tilledTile.SetStage(TillableStage.TilledWet, null, false, null,
                     Network.PlayerList.First(x => x.IsMasterClient), true);
                 wateredAmount++;
             }
-        }
 
         _logger.Log($"Watered {wateredAmount} tiles");
     }
@@ -105,10 +103,7 @@ public class PachaCheats
             typeof(PlayerEntity).GetField("EntityManager", BindingFlags.NonPublic | BindingFlags.Instance);
         var entityManager = (EntityManager)entityManagerField?.GetValue(playerEntity);
 
-        if (entityManager is null)
-        {
-            _logger.Log("Entity manager is null");
-        }
+        if (entityManager is null) _logger.Log("Entity manager is null");
 
         return entityManager;
     }
@@ -127,18 +122,14 @@ public class PachaCheats
 
         if (lastHarvestedProperty == null || plantAgeProperty == null || updateRendererMethod == null ||
             levelProperty == null)
-        {
             throw new ArgumentNullException(nameof(PlantEntity),
                 "Plant entity data fields are initialized incorrectly");
-        }
 
         levelProperty.SetValue(plantEntity, 2);
         plantEntity.Withered = false;
         if (CheatOptions.IsInfiniteHarvestEnabled)
-        {
             lastHarvestedProperty.SetValue(plantEntity,
                 null); // it allows to harvest plant in the same day but its glitched, not working
-        }
 
         plantAgeProperty.SetValue(plantEntity, plantEntity.IsRepeating ? plantEntity.Plant.RepeatsEvery : 30f);
 
@@ -172,10 +163,7 @@ public class PachaCheats
 
             _logger.Log($"[GrowCrops] Found {plantsInRange.Count} plants in range");
 
-            foreach (var plantEntity in plantsInRange)
-            {
-                PatchPlantEntity(plantEntity);
-            }
+            foreach (var plantEntity in plantsInRange) PatchPlantEntity(plantEntity);
         }
         catch (Exception ex)
         {

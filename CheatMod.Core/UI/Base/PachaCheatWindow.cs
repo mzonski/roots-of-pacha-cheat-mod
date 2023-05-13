@@ -8,7 +8,8 @@ public abstract class PachaCheatWindow
     {
         Manager = manager;
     }
+
     protected abstract void DrawInternal(int windowId);
-    
+
     public abstract void Draw();
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using SodaDen.Pacha;
 
 namespace CheatMod.Core;
@@ -17,7 +17,7 @@ public class PachaItemDb
         InventoryItems.Clear();
         InventoryItems.AddRange(GetDatabaseInventoryItems());
     }
-    
+
     private static IEnumerable<InventoryItem> GetDatabaseInventoryItems()
     {
         var inventoryItems = new List<InventoryItem>();
