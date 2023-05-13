@@ -78,6 +78,8 @@ public class MainWindow : PachaCheatWindow
             "Infinite water tool", CheatUIStyles.Toggle);
         CheatOptions.IsMovementSpeedEnabled = GUILayout.Toggle(CheatOptions.IsMovementSpeedEnabled,
             "Movement speedhack", CheatUIStyles.Toggle);
+        CheatOptions.IsInfiniteHarvestEnabled = GUILayout.Toggle(CheatOptions.IsInfiniteHarvestEnabled,
+            "Infinite harvest", CheatUIStyles.Toggle);
 
         GUILayout.Space(20);
 

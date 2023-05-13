@@ -11,7 +11,7 @@ public class CheatOptions
     public static bool IsFreezeTimeEnabled { get; set; } = false;
     public static bool IsMovementSpeedEnabled { get; set; } = true;
     public static float PlayerMovementSpeed { get; set; } = 4f;
-    public static bool IsInfiniteHarvestEnabled { get; set; } = true;
+    public static bool IsInfiniteHarvestEnabled { get; set; } = false;
 
     #endregion
 

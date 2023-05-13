@@ -10,9 +10,11 @@ public class PachaManager
     private readonly PachaCheatUI _cheatUI;
     public readonly PachaItemDb ItemDb;
     public readonly PachaCheats PachaCheats;
+    public readonly IModLogger Logger;
 
     public PachaManager(PachaItemDb itemDb, IModLogger logger)
     {
+        Logger = logger;
         ItemDb = itemDb;
         PachaCheats = new PachaCheats(logger);
         _cheatUI = new PachaCheatUI(this);
