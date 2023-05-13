@@ -1,25 +1,38 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CheatMod.Core.UI.Windows;
+
 
 public class MainWindow : PachaCheatWindow
 {
     private Rect _windowRect = new(16, 16, 200, 350);
 
-    private readonly Action<bool> _waterAllTilesClickHandler = isClicked =>
+    private bool _isWaterAllTilesClicked;
+    public bool IsWaterAllTilesClicked
     {
-        if (!isClicked) return;
+        get => _isWaterAllTilesClicked;
+        set
+        {
+            if (_isWaterAllTilesClicked == value) return;
+            _isWaterAllTilesClicked = value;
+            if (value)
+                Manager.PachaCheats.WaterAllTilledTiles();
+        } 
+    }
 
-        PachaCheats.WaterAllTilledTiles();
-    };
-
-    private readonly Action<bool> _growCropsAroundClickHandler = isClicked =>
+    private bool _isGrowCropsAroundClicked;
+    public bool IsGrowCropsAroundClicked 
     {
-        if (!isClicked) return;
+        get => _isGrowCropsAroundClicked;
+        set
+        {
+            if (_isGrowCropsAroundClicked == value) return;
+            _isGrowCropsAroundClicked = value;
+            if (value)
+                Manager.PachaCheats.GrowCrops(9f);
+        } 
+    }
 
-        PachaCheats.GrowCrops(9f);
-    };
 
     public MainWindow(PachaManager manager) : base(manager)
     {
@@ -67,8 +80,8 @@ public class MainWindow : PachaCheatWindow
 
         GUILayout.Space(20);
 
-        _waterAllTilesClickHandler.Debounce()(GUILayout.Button("Water all crops"));
-        _growCropsAroundClickHandler.Debounce()(GUILayout.Button("Grow crops around"));
+        IsWaterAllTilesClicked = GUILayout.Button("Water all crops");
+        IsGrowCropsAroundClicked = GUILayout.Button("Grow crops around");
 
         GUILayout.FlexibleSpace();
 
@@ -87,4 +100,5 @@ public class MainWindow : PachaCheatWindow
     {
         _windowRect = GUILayout.Window((int)CheatWindowType.Main, _windowRect, DrawInternal, "Pacha Cheat");
     }
+
 }

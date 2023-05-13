@@ -21,7 +21,7 @@ public class TimeManagerWindow : PachaCheatWindow
             Description = $"Time set to: {SelectedTime.Hours:00}:{SelectedTime.Minutes:00}"
         });
         
-        PachaCheats.SetTime(SelectedTime);
+        Manager.PachaCheats.SetTime(SelectedTime);
     }
 
     public int TimeOffset
@@ -49,7 +49,7 @@ public class TimeManagerWindow : PachaCheatWindow
         {
             if (CheatOptions.IsFreezeTimeEnabled && !value) // on disable
             {
-                PachaCheats.SetTime(TimeSpan.FromHours(6));
+                Manager.PachaCheats.SetTime(TimeSpan.FromHours(6));
             }
 
             if (value != CheatOptions.IsFreezeTimeEnabled)

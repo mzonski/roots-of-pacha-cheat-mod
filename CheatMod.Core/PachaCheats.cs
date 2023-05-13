@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-//using MelonLoader;
+using CheatMod.Core.Services;
 using Photon.Pun;
 using SodaDen.Pacha;
 using UnityAtoms;
@@ -10,9 +10,16 @@ using UnityEngine;
 
 namespace CheatMod.Core;
 
-public static class PachaCheats
+public class PachaCheats
 {
-    public static void AddItemToInventory(short itemId, int qty)
+    private readonly IModLogger _logger;
+
+    public PachaCheats(IModLogger logger)
+    {
+        _logger = logger;
+    }
+
+    public void AddItemToInventory(short itemId, int qty)
     {
         var it = (InventoryItem)Database.Instance[itemId];
         var pen = GameObject.FindObjectOfType<PlayerEntity>();
@@ -22,11 +29,11 @@ public static class PachaCheats
         else
             pen.Inventory.AddItem(it, qty);
 
-        //MelonLogger.Msg($"Item {it.Name}[{it.ID}] added (x{qty})");
+        _logger.Log($"Item {it.Name}[{it.ID}] added (x{qty})");
     }
 
     // Use it with caution. Generates a lot of stuff
-    public static void ForceRegenerateHittableResources()
+    public void ForceRegenerateHittableResources()
     {
         var player = GameObject.FindObjectOfType<PlayerEntity>();
 
@@ -36,14 +43,14 @@ public static class PachaCheats
         method?.Invoke(TilesManager.Instance, new object[] { player.CurrentDay, true });
     }
 
-    public static void AddDayBuff(PlayerStatBuffType type, int value)
+    public void AddDayBuff(PlayerStatBuffType type, int value)
     {
         var stats = GameObject.FindObjectOfType<PlayerStats>();
         var buff = PlayerStatBuff.CreateForDays(PlayerStatBuffSource.PassedOut, type, value, 1);
         stats.AddBuffLocal(buff);
     }
 
-    public static void WaterAllTilledTiles()
+    public void WaterAllTilledTiles()
     {
         var tiles = TilesManager.Instance.AllTiles;
         var wateredAmount = 0;
@@ -57,15 +64,15 @@ public static class PachaCheats
             }
         }
 
-        //MelonLogger.Msg($"Watered {wateredAmount} tiles");
+        _logger.Log($"Watered {wateredAmount} tiles");
     }
 
 
-    public static void SetTime(TimeSpan time)
+    public void SetTime(TimeSpan time)
     {
         try
         {
-            //MelonLogger.Msg($"Trying to set {time.Hours:00}:{time.Minutes:00}");
+            _logger.Log($"Trying to set {time.Hours:00}:{time.Minutes:00}");
             var session = GameObject.FindObjectOfType<Session>();
 
             var dayTimeField =
@@ -75,7 +82,7 @@ public static class PachaCheats
             var dayStartTimeField =
                 typeof(Session).GetField("DayStartTime", BindingFlags.NonPublic | BindingFlags.Instance);
 
-            var dayTime = (FloatVariable)dayTimeField.GetValue(session);
+            var dayTime = (FloatVariable)dayTimeField!.GetValue(session);
 
             var serverTimestamp = PhotonNetwork.ServerTimestamp;
 
@@ -83,30 +90,30 @@ public static class PachaCheats
             offsetTimeField!.SetValue(session, 0f);
             dayStartTimeField!.SetValue(session, serverTimestamp);
 
-            //MelonLogger.Msg($"Time set to: {time.Hours:00}:{time.Minutes:00}");
+            _logger.Log($"Time set to: {time.Hours:00}:{time.Minutes:00}");
         }
         catch (Exception ex)
         {
-            //MelonLogger.Error("Couldn't set time due to " + ex.Message);
+            _logger.Log("Couldn't set time due to " + ex.Message);
         }
     }
 
-    private static EntityManager RetrieveEntityManager()
+    private EntityManager RetrieveEntityManager()
     {
         var playerEntity = GameObject.FindObjectOfType<PlayerEntity>();
         var entityManagerField =
             typeof(PlayerEntity).GetField("EntityManager", BindingFlags.NonPublic | BindingFlags.Instance);
         var entityManager = (EntityManager)entityManagerField?.GetValue(playerEntity);
 
-        if (entityManager == null)
+        if (entityManager is null)
         {
-            //MelonLogger.Error("Entity manager is null");
+            _logger.Log("Entity manager is null");
         }
 
         return entityManager;
     }
 
-    private static void PatchPlantEntity(PlantEntity plantEntity)
+    private void PatchPlantEntity(PlantEntity plantEntity)
     {
         var lastHarvestedProperty =
             typeof(PlantEntity).GetProperty("LastHarvested", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -139,14 +146,14 @@ public static class PachaCheats
         updateRendererMethod.Invoke(plantEntity, null);
     }
 
-    public static void GrowCrops(float range = 3f)
+    public void GrowCrops(float range = 3f)
     {
         try
         {
-            //MelonLogger.Msg("Grow crops");
+            _logger.Log("Grow crops");
 
             var plantsInRange = new List<PlantEntity>();
-            var playerCoords = PachaUtils.GetPlayerCurrentCoords();
+            var playerCoords = GetPlayerCurrentCoords();
             foreach (var entityData in Game.Current.Entities)
             {
                 if (entityData.Type != EntityType.Plant) continue;
@@ -163,7 +170,7 @@ public static class PachaCheats
                 plantsInRange.Add(plantEntity);
             }
 
-            //MelonLogger.Msg($"[GrowCrops] Found {plantsInRange.Count} plants in range");
+            _logger.Log($"[GrowCrops] Found {plantsInRange.Count} plants in range");
 
             foreach (var plantEntity in plantsInRange)
             {
@@ -172,8 +179,42 @@ public static class PachaCheats
         }
         catch (Exception ex)
         {
-            //MelonLogger.Error("[GrowCrops] Failed: " + ex.Message);
-            //MelonLogger.Msg(ex.StackTrace);
+            _logger.Log("[GrowCrops] Failed: " + ex.Message);
+            _logger.Log(ex.StackTrace);
         }
+    }
+
+    // Get current standing tile = TilesManager.Instance.TileAt(GetPlayerCurrentCoords())
+    public Vector2 GetPlayerCurrentCoords()
+    {
+        var player = GameObject.FindObjectOfType<PlayerEntity>();
+        _logger.Log(
+            $"[{player.Name}] x: {player.PlayerStateController.PositionWithDirection.x} y: {player.PlayerStateController.PositionWithDirection.y}");
+        return player.PlayerStateController.PositionWithDirection;
+    }
+
+    public void DumpEntities()
+    {
+        var inventoryItems = new List<InventoryItem>();
+        var types = new HashSet<string>();
+        for (short i = 0; i < short.MaxValue; i++)
+        {
+            var we = Database.Instance[i];
+            if (we == null) continue;
+
+            if (we is InventoryItem item) inventoryItems.Add(item);
+
+            var typ = we.GetType();
+            if (!types.Contains(typ.ToString())) types.Add(typ.ToString());
+
+            _logger.Log("Entity: " + we.name + " [-] " + we.ID + " [-] " + we.GetType());
+        }
+
+        _logger.Log("Inventory items");
+        foreach (var inventoryItem in inventoryItems)
+            _logger.Log(inventoryItem.ID + "  " + inventoryItem.Name + "  " + inventoryItem.Description);
+
+        _logger.Log("All types");
+        foreach (var type in types) _logger.Log(type);
     }
 }

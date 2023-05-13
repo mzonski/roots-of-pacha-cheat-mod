@@ -1,7 +1,7 @@
 ﻿namespace CheatMod.Core.Services;
 
-public interface ILogger
+public interface IModLogger
 {
     void Log(string message);
-    ILogger Instance { get; internal set; }
+    void Log(object obj);
 }

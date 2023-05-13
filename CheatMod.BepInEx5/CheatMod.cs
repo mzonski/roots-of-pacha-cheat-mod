@@ -1,10 +1,7 @@
 ﻿using BepInEx;
 using CheatMod.Core;
 using CheatMod.Core.Patches;
-using CheatMod.Core.UI;
 using HarmonyLib;
-using SodaDen.Pacha;
-using UnityEngine;
 
 namespace CheatMod.BepInEx5;
 
@@ -12,8 +9,7 @@ namespace CheatMod.BepInEx5;
 [BepInProcess("Roots of Pacha")]
 public class CheatMod : BaseUnityPlugin
 {
-    private static readonly PachaManager PachaManager = new(new PachaItemDb());
-    private static readonly PachaCheatUI CheatUI = new(PachaManager);
+    private static readonly PachaManager PachaManager = new(new PachaItemDb(), new ModLogger());
 
     private void Awake()
     {
@@ -23,19 +19,11 @@ public class CheatMod : BaseUnityPlugin
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F12)) PachaCheats.ForceRegenerateHittableResources();
-
-        if (Input.GetKeyDown(KeyCode.F2)) CheatOptions.DrawUI = !CheatOptions.DrawUI;
-
-        if (Input.GetKeyDown(KeyCode.F3)) PachaCheats.AddDayBuff(PlayerStatBuffType.Charisma, 5);
-
-        if (Input.GetKeyDown(KeyCode.F4)) PachaUtils.GetPlayerCurrentCoords();
-
-        if (Input.GetKeyDown(KeyCode.F5)) PachaCheats.GrowCrops();
+        PachaManager.CatchKeyboardInput();
     }
 
     public void OnGUI()
     {
-        CheatUI.Draw();
+        PachaManager.DrawGui();
     }
 }

@@ -1,4 +1,6 @@
-﻿using SodaDen.Pacha.UI;
+﻿using System.Reflection;
+using SodaDen.Pacha.UI;
+using UnityEngine;
 
 namespace CheatMod.Core.Patches;
 using HarmonyLib;
@@ -9,6 +11,22 @@ public partial class CheatModPatches
     [HarmonyPostfix]
     private static void SkipDisclaimerPatch()
     {
-        PachaUtils.SkipDisclaimerIntros();
+        SkipDisclaimerIntros();
+    }
+    
+    private static void SkipDisclaimerIntros()
+    {
+        var dsc = GameObject.FindObjectOfType<Disclaimer>();
+
+        if (dsc == null)
+        {
+            return;
+        }
+
+        dsc.OnAllLogos();
+        dsc.OnSplashEnded();
+
+        var currentIndexProperty = typeof(Disclaimer).GetProperty("CurrentIndex", BindingFlags.NonPublic | BindingFlags.Instance);
+        currentIndexProperty?.SetValue(dsc, 0);
     }
 }

@@ -10,7 +10,7 @@ public class ItemSpawnerWindow : PachaCheatWindow
     private Rect _itemSpawnerWindow = new(220, 16, 400, 520);
 
     private bool _isFirstRender;
-    private GUIContent[] _currentListItems = new GUIContent[0];
+    private GUIContent[] _currentListItems = Array.Empty<GUIContent>();
     private int _selectedItemId = -1;
     private int _itemQty = 1;
     private string _itemsFilterBy = string.Empty;
@@ -69,7 +69,7 @@ public class ItemSpawnerWindow : PachaCheatWindow
 
         if (_selectedItemId > -1)
             if (GUILayout.Button("Add to inventory"))
-                PachaCheats.AddItemToInventory(short.Parse(_currentListItems[_selectedItemId].tooltip), _itemQty);
+                Manager.PachaCheats.AddItemToInventory(short.Parse(_currentListItems[_selectedItemId].tooltip), _itemQty);
 
 
         GUILayout.EndVertical();
