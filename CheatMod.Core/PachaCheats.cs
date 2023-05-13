@@ -19,15 +19,25 @@ public class PachaCheats
         _logger = logger;
     }
 
-    public void AddItemToInventory(short itemId, int qty)
+    public void AddItemToInventory(short itemId, int qty, ItemQuality quality = ItemQuality.Normal)
     {
         var it = (InventoryItem)Database.Instance[itemId];
         var pen = GameObject.FindObjectOfType<PlayerEntity>();
+        
+
 
         if (it is SeedItem)
             pen.SeedInventory.AddItem(pen, it, ItemObtainedSource.Picked, qty);
         else
-            pen.Inventory.AddItem(it, qty);
+        {
+            var item = new InventoryItemWithProperties
+            {
+                Item = it,
+                Quality = quality
+            };
+            pen.Inventory.AddItem(item, qty);
+
+        }
 
         _logger.Log($"Item {it.Name}[{it.ID}] added (x{qty})");
     }
@@ -129,7 +139,7 @@ public class PachaCheats
         plantEntity.Withered = false;
         if (CheatOptions.IsInfiniteHarvestEnabled)
             lastHarvestedProperty.SetValue(plantEntity,
-                null); // it allows to harvest plant in the same day but its glitched, not working
+                null);
 
         plantAgeProperty.SetValue(plantEntity, plantEntity.IsRepeating ? plantEntity.Plant.RepeatsEvery : 30f);
 

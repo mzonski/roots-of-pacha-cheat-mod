@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using SodaDen.Pacha;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace CheatMod.Core.UI.Windows;
 public class ItemSpawnerWindow : PachaCheatWindow
 {
     private GUIContent[] _currentListItems = Array.Empty<GUIContent>();
+    private readonly GUIContent[] _itemQualityOptions;
 
     private bool _isFirstRender;
     private int _itemQty = 1;
@@ -18,6 +20,7 @@ public class ItemSpawnerWindow : PachaCheatWindow
 
     public ItemSpawnerWindow(PachaManager manager) : base(manager)
     {
+        _itemQualityOptions = CreateItemQualityOptions();
     }
 
     private string ItemsFilterBy
@@ -25,10 +28,39 @@ public class ItemSpawnerWindow : PachaCheatWindow
         get => _itemsFilterBy;
         set
         {
-            if (string.IsNullOrEmpty(value) || _itemsFilterBy == value) return;
+            if (value is null || _itemsFilterBy == value) return;
             _itemsFilterBy = value;
             SetSelectedListItems();
         }
+    }
+
+    private ItemQuality _itemQuality = ItemQuality.Best;
+
+    private ItemQuality ItemQuality
+    {
+        get => _itemQuality;
+        set
+        {
+            if (_itemQuality == value) return;
+            _itemQuality = value;
+        }
+    }
+
+
+    private int SelectedQualityIndex { get; set; }
+
+    private GUIContent[] CreateItemQualityOptions()
+    {
+        var values = Enum.GetValues(typeof(ItemQuality));
+        var list = new List<GUIContent>();
+
+        foreach (byte valueObj in values)
+        {
+            var name = Enum.GetName(typeof(ItemQuality), valueObj);
+            list.Add(new GUIContent(name, valueObj.ToString()));
+        }
+
+        return list.ToArray();
     }
 
     protected override void DrawInternal(int windowId)
@@ -57,7 +89,6 @@ public class ItemSpawnerWindow : PachaCheatWindow
 
         GUILayout.EndScrollView();
 
-
         GUILayout.BeginHorizontal();
         GUILayout.Label("Quantity");
         _itemQty = (int)GUI.HorizontalSlider(new Rect(80, 455, 200, 20), _itemQty, 0, 255);
@@ -68,8 +99,15 @@ public class ItemSpawnerWindow : PachaCheatWindow
         GUILayout.FlexibleSpace();
 
         if (_selectedItemId > -1)
+        {
+            SelectedQualityIndex = GUILayout.Toolbar(SelectedQualityIndex, _itemQualityOptions);
+            var quality = (ItemQuality)byte.Parse(_itemQualityOptions[SelectedQualityIndex].tooltip);
+
             if (GUILayout.Button("Add to inventory"))
-                Manager.PachaCheats.AddItemToInventory(short.Parse(_currentListItems[_selectedItemId].tooltip), _itemQty);
+                Manager.PachaCheats.AddItemToInventory(short.Parse(_currentListItems[_selectedItemId].tooltip),
+                    _itemQty, quality);
+        }
+
 
         GUILayout.EndVertical();
 
@@ -85,7 +123,7 @@ public class ItemSpawnerWindow : PachaCheatWindow
 
     private void SetSelectedListItems()
     {
-        var filteredList = !string.IsNullOrEmpty(ItemsFilterBy)
+        var filteredList = ItemsFilterBy is not null
             ? Manager.ItemDb.InventoryItems.Where(ii =>
                 ii.Name.ToLowerInvariant().Contains(ItemsFilterBy.ToLowerInvariant()))
             : Array.Empty<InventoryItem>();
