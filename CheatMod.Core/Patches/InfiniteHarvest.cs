@@ -13,7 +13,7 @@ public partial class CheatModPatches
         if (!CheatOptions.IsInfiniteHarvestEnabled)
             return true;
 
-        __result = $"{__instance.ID}-{__instance.CurrentDay.Value}-${Random.Range(1, int.MaxValue)}";
+        __result = $"{__instance.ID}-{__instance.CurrentDay}-${Random.Range(1, int.MaxValue)}";
         return false;
     }
 

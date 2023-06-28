@@ -33,4 +33,5 @@ This repository contains a cheat mod for Roots of Pacha game that can be used to
 | F2  | Open cheat menu                                           |
 | F3  | Add 5 charisma for a day                                  |
 | F5  | Grow crops in 3f range                                    |
+| F6  | Grow trees in 3f range                                    |
 | F12 | Plant grass/rocks/trees over tiles (massive, be careful!) |
