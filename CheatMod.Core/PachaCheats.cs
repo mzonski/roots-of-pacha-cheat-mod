@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using CheatMod.Core.Services;
+using JetBrains.Annotations;
 using Photon.Pun;
 using SodaDen.Pacha;
 using UnityAtoms;
@@ -23,7 +24,6 @@ public class PachaCheats
     {
         var it = (InventoryItem)Database.Instance[itemId];
         var pen = GameObject.FindObjectOfType<PlayerEntity>();
-        
 
 
         if (it is SeedItem)
@@ -36,7 +36,6 @@ public class PachaCheats
                 Quality = quality
             };
             pen.Inventory.AddItem(item, qty);
-
         }
 
         _logger.Log($"Item {it.Name}[{it.ID}] added (x{qty})");
@@ -225,7 +224,7 @@ public class PachaCheats
                     throw new ArgumentNullException(nameof(treeEntity),
                         "Tree entity data fields are initialized incorrectly");
                 }
-                
+
                 var renderer = (TreeRenderer)treeRendererProperty.GetValue(treeEntity);
                 var healthComponent = (HealthComponent)healthField.GetValue(treeEntity);
                 var currentDay = (int)currentDayProperty.GetValue(treeEntity);
@@ -247,6 +246,103 @@ public class PachaCheats
         {
             _logger.Log("[GrowTrees] Failed: " + ex.Message);
             _logger.Log(ex.StackTrace);
+        }
+    }
+
+    private IEnumerable<IEntityData> GetEntityDataInRange(float range)
+    {
+        var playerCoords = GetPlayerCurrentCoords();
+        var entityList = new List<IEntityData>();
+
+        foreach (var entityData in Game.Current.Entities)
+        {
+            //_logger.Log($"Entity: {entityData.Type.ToString()} ID: {entityData.ID}");
+            if (entityData is not IPositionableEntityData posEntityData) continue;
+            if (!posEntityData.Position.HasValue) continue;
+            var distanceFromPlayer = Vector2.Distance(playerCoords, posEntityData.Position.Value);
+            if (distanceFromPlayer > range) continue;
+
+            entityList.Add(entityData);
+        }
+
+        return entityList;
+    }
+
+    private static void DestroyHittableResource([CanBeNull] HittableResourceEntity hittableEntity)
+    {
+        if (hittableEntity is null) return;
+        var healthPropertyInfo = hittableEntity.GetType()
+            .GetProperty("Health", BindingFlags.NonPublic | BindingFlags.Instance);
+        if (healthPropertyInfo == null) return;
+        var healthComponent = (HealthComponent)healthPropertyInfo.GetValue(hittableEntity);
+        if (healthComponent.CurrentHealth > 0f)
+        {
+            healthComponent.DecreaseHealth(healthComponent.CurrentHealth);
+        }
+    }
+
+    public void DestroyHittableResources(float range = 3f)
+    {
+        _logger.Log("Destroy hittable resources");
+
+        var cavesManager = GameObject.FindObjectOfType<CavesManager>();
+        var playerManager = GameObject.FindObjectOfType<PlayerManager>();
+
+        var psc = playerManager.PlayerEntity.PlayerStageController;
+
+        switch (psc.Stage.Region)
+        {
+            case Region.Caves:
+            {
+                foreach (var caveController in cavesManager.Caves)
+                {
+                    foreach (var caveRoom in caveController.Rooms)
+                    {
+                        if (!caveRoom.Stage.GetComponent<Collider2D>().OverlapPoint(psc.transform.position)) continue;
+                        
+                        foreach (var hittableEntity in caveRoom.CurrentHittables.ToList())
+                        {
+                            if (Vector2.Distance(hittableEntity.transform.position, psc.transform.position) < range)
+                            {
+                                DestroyHittableResource(hittableEntity);
+                                caveRoom.CurrentHittables.Remove(hittableEntity);
+                            }
+                        }
+
+                        foreach (var shim in caveRoom.CurrentCaveOresShams.ToList())
+                        {
+                            if (Vector2.Distance(shim.transform.position, psc.transform.position) < range && 
+                                shim.Health.CurrentHealth > 0f)
+                            {
+                                shim.Health.DecreaseHealth(shim.Health.CurrentHealth);
+                                
+                                if (Application.isPlaying)
+                                    caveRoom.Pool.Release(shim);
+                                else
+                                    UnityEngine.Object.DestroyImmediate(shim.gameObject);
+                                
+                                caveRoom.CurrentCaveOresShams.Remove(shim);
+                            }
+                        }
+                    }
+                }
+
+                break;
+            }
+            case Region.TheLand:
+            {
+                var hittableEntities = GetEntityDataInRange(range)
+                    .Where(e => e.Type == EntityType.Resource)
+                    .Select(e => GuidManager.ResolveGuid(e.ID)?.GetComponent<HittableResourceEntity>())
+                    .Where(entity => entity is not null);
+
+                foreach (var hittableEntity in hittableEntities)
+                {
+                    DestroyHittableResource(hittableEntity);
+                }
+
+                break;
+            }
         }
     }
 

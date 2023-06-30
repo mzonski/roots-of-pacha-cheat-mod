@@ -85,6 +85,9 @@
         <Reference Include="UnityEngine.InputLegacyModule">
           <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
         </Reference>
+        <Reference Include="UnityEngine.Physics2DModule">
+          <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+        </Reference>
         <Reference Include="UnityEngine.TextCoreFontEngineModule">
           <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
         </Reference>

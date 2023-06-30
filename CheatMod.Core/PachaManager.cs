@@ -33,6 +33,8 @@ public class PachaManager
         if (Input.GetKeyDown(KeyCode.F5)) PachaCheats.GrowCrops();
         
         if (Input.GetKeyDown(KeyCode.F6)) PachaCheats.GrowTrees();
+        
+        if (Input.GetKeyDown(KeyCode.F7)) PachaCheats.DestroyHittableResources();
     }
 
     public void DrawGui()
