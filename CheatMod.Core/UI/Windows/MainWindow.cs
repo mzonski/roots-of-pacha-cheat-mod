@@ -89,6 +89,8 @@ public class MainWindow : PachaCheatWindow
             GUILayout.Toggle(CheatOptions.IsEasyFishingEnabled, "Easy fishing", CheatUIStyles.Toggle);
         CheatOptions.IsInfiniteFluteEnabled =
             GUILayout.Toggle(CheatOptions.IsInfiniteFluteEnabled, "Infinite flute", CheatUIStyles.Toggle);
+        CheatOptions.IsSkipAttuneMinigameEnabled =
+            GUILayout.Toggle(CheatOptions.IsSkipAttuneMinigameEnabled, "Skip attune game", CheatUIStyles.Toggle);
         CheatOptions.IsInfiniteSeedsEnabled =
             GUILayout.Toggle(CheatOptions.IsInfiniteSeedsEnabled, "Infinite seeds", CheatUIStyles.Toggle);
         CheatOptions.IsInfiniteStaminaEnabled =

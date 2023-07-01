@@ -5,6 +5,7 @@ public class CheatOptions
     #region Game options
     public static bool IsEasyFishingEnabled { get; set; } = true;
     public static bool IsInfiniteFluteEnabled { get; set; } = true;
+    public static bool IsSkipAttuneMinigameEnabled { get; set; } = true;
     public static bool IsInfiniteSeedsEnabled { get; set; } = true;
     public static bool IsInfiniteStaminaEnabled { get; set; } = true;
     public static bool IsInfiniteWaterToolEnabled { get; set; } = true;
