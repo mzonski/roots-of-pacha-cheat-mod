@@ -127,6 +127,7 @@
         <Compile Include="UI\Windows\ItemSpawnerWindow.cs" />
         <Compile Include="UI\Windows\MainWindow.cs" />
         <Compile Include="UI\Windows\PlayerStatsWindow.cs" />
+        <Compile Include="UI\Windows\TeleportWindow.cs" />
         <Compile Include="UI\Windows\TimeManagerWindow.cs" />
     </ItemGroup>
     <ItemGroup>

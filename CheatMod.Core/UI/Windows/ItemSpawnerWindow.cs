@@ -8,13 +8,14 @@ namespace CheatMod.Core.UI.Windows;
 
 public class ItemSpawnerWindow : PachaCheatWindow
 {
+    private Rect _itemSpawnerWindow = new(440, 16, 400, 520);
+
     private GUIContent[] _currentListItems = Array.Empty<GUIContent>();
     private readonly GUIContent[] _itemQualityOptions;
 
     private bool _isFirstRender;
     private int _itemQty = 1;
     private string _itemsFilterBy = string.Empty;
-    private Rect _itemSpawnerWindow = new(220, 16, 400, 520);
     private Vector2 _scrollPosition = Vector2.zero;
     private int _selectedItemId = -1;
 

@@ -5,8 +5,7 @@ namespace CheatMod.Core.UI.Windows;
 
 public class MainWindow : PachaCheatWindow
 {
-    private Rect _windowRect = new(16, 16, 200, 350);
-
+    private Rect _mainWindow = new(16, 16, 200, 450);
 
     public MainWindow(PachaManager manager) : base(manager)
     {
@@ -71,6 +70,17 @@ public class MainWindow : PachaCheatWindow
         CheatOptions.DrawTimeManagerWindow = true;
     }
 
+    private void HandleOpenTeleportsClick()
+    {
+        if (CheatOptions.DrawTeleportWindow)
+        {
+            CheatOptions.DrawTeleportWindow = false;
+            return;
+        }
+
+        CheatOptions.DrawTeleportWindow = true;
+    }
+
     protected override void DrawInternal(int windowId)
     {
         GUILayout.BeginVertical();
@@ -95,6 +105,8 @@ public class MainWindow : PachaCheatWindow
         IsWaterAllTilesClicked = GUILayout.Button("Water all crops");
         IsGrowCropsAroundClicked = GUILayout.Button("Grow crops around");
         IsGrowTreesAroundClicked = GUILayout.Button("Grow trees around");
+        
+        GUILayout.Space(20);
 
         GUILayout.FlexibleSpace();
 
@@ -104,6 +116,9 @@ public class MainWindow : PachaCheatWindow
         if (GUILayout.Button(!CheatOptions.DrawTimeManagerWindow ? "Open time manager" : "Close time manager"))
             HandleOpenTimeManagerClick();
 
+        if (GUILayout.Button(!CheatOptions.DrawTeleportWindow ? "Open teleports" : "Close teleports"))
+            HandleOpenTeleportsClick();
+
         GUILayout.EndVertical();
 
         GUI.DragWindow();
@@ -111,7 +126,7 @@ public class MainWindow : PachaCheatWindow
 
     public override void Draw()
     {
-        _windowRect = GUILayout.Window((int)CheatWindowType.Main, _windowRect, DrawInternal, "Pacha Cheat");
+        _mainWindow = GUILayout.Window((int)CheatWindowType.Main, _mainWindow, DrawInternal, "Pacha Cheat");
     }
 
 }

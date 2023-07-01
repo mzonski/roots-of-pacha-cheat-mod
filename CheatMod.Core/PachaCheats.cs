@@ -25,7 +25,6 @@ public class PachaCheats
         var it = (InventoryItem)Database.Instance[itemId];
         var pen = GameObject.FindObjectOfType<PlayerEntity>();
 
-
         if (it is SeedItem)
             pen.SeedInventory.AddItem(pen, it, ItemObtainedSource.Picked, qty);
         else
@@ -281,6 +280,16 @@ public class PachaCheats
         }
     }
 
+    public void TeleportPlayer(float x, float y)
+    {
+        var playerManager = GameObject.FindObjectOfType<PlayerManager>();
+
+        var playerStageCtl = playerManager.PlayerEntity.PlayerStateController;
+
+        playerStageCtl.AboutToTeleport();
+        playerStageCtl.GetComponent<BufferedInterpolationPhotonView>().TeleportTo(new Vector2(x, y));
+    }
+
     public void DestroyHittableResources(float range = 3f)
     {
         _logger.Log("Destroy hittable resources");
@@ -299,7 +308,7 @@ public class PachaCheats
                     foreach (var caveRoom in caveController.Rooms)
                     {
                         if (!caveRoom.Stage.GetComponent<Collider2D>().OverlapPoint(psc.transform.position)) continue;
-                        
+
                         foreach (var hittableEntity in caveRoom.CurrentHittables.ToList())
                         {
                             if (Vector2.Distance(hittableEntity.transform.position, psc.transform.position) < range)
@@ -311,16 +320,16 @@ public class PachaCheats
 
                         foreach (var shim in caveRoom.CurrentCaveOresShams.ToList())
                         {
-                            if (Vector2.Distance(shim.transform.position, psc.transform.position) < range && 
+                            if (Vector2.Distance(shim.transform.position, psc.transform.position) < range &&
                                 shim.Health.CurrentHealth > 0f)
                             {
                                 shim.Health.DecreaseHealth(shim.Health.CurrentHealth);
-                                
+
                                 if (Application.isPlaying)
                                     caveRoom.Pool.Release(shim);
                                 else
                                     UnityEngine.Object.DestroyImmediate(shim.gameObject);
-                                
+
                                 caveRoom.CurrentCaveOresShams.Remove(shim);
                             }
                         }

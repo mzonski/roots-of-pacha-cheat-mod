@@ -17,7 +17,8 @@ public class PachaCheatUI
             { CheatWindowType.Main, new MainWindow(manager) },
             { CheatWindowType.ItemSpawner, new ItemSpawnerWindow(manager) },
             { CheatWindowType.PlayerStats, new PlayerStatsWindow(manager) },
-            { CheatWindowType.TimeManager, new TimeManagerWindow(manager) }
+            { CheatWindowType.TimeManager, new TimeManagerWindow(manager) },
+            { CheatWindowType.Teleports, new TeleportWindow(manager) },
         };
     }
 

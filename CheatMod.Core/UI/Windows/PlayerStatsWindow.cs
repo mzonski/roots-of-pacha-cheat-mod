@@ -4,7 +4,7 @@ namespace CheatMod.Core.UI.Windows;
 
 public class PlayerStatsWindow : PachaCheatWindow
 {
-    private Rect _statsWindow = new(16, 370, 300, 60);
+    private Rect _statsWindow = new(16, 470, 300, 60);
 
     public PlayerStatsWindow(PachaManager manager) : base(manager)
     {

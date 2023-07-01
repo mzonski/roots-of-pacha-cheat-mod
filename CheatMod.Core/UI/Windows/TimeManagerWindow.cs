@@ -8,7 +8,7 @@ namespace CheatMod.Core.UI.Windows;
 public class TimeManagerWindow : PachaCheatWindow
 {
     private int _timeOffset = 420;
-    private Rect _window = new(16, 430, 300, 90);
+    private Rect _timeManagerWindow = new(16, 550, 300, 90);
 
     public TimeManagerWindow(PachaManager manager) : base(manager)
     {
@@ -78,6 +78,6 @@ public class TimeManagerWindow : PachaCheatWindow
     public override void Draw()
     {
         if (!CheatOptions.DrawTimeManagerWindow) return;
-        _window = GUILayout.Window((int)CheatWindowType.TimeManager, _window, DrawInternal, "Pacha Time Manager");
+        _timeManagerWindow = GUILayout.Window((int)CheatWindowType.TimeManager, _timeManagerWindow, DrawInternal, "Pacha Time Manager");
     }
 }

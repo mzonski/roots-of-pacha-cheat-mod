@@ -5,5 +5,6 @@ public enum CheatWindowType
     Main = 0,
     ItemSpawner = 1,
     PlayerStats = 2,
-    TimeManager = 3
+    TimeManager = 3,
+    Teleports = 4,
 }

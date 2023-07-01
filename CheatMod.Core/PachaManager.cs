@@ -1,6 +1,5 @@
 using CheatMod.Core.Services;
 using CheatMod.Core.UI;
-using SodaDen.Pacha;
 using UnityEngine;
 
 namespace CheatMod.Core;
@@ -22,19 +21,15 @@ public class PachaManager
 
     public void CatchKeyboardInput()
     {
-        if (Input.GetKeyDown(KeyCode.F12)) PachaCheats.ForceRegenerateHittableResources();
-
         if (Input.GetKeyDown(KeyCode.F2)) CheatOptions.DrawUI = !CheatOptions.DrawUI;
-
-        if (Input.GetKeyDown(KeyCode.F3)) PachaCheats.AddDayBuff(PlayerStatBuffType.Charisma, 5);
-
-        if (Input.GetKeyDown(KeyCode.F4)) PachaCheats.GetPlayerCurrentCoords();
-
+        
         if (Input.GetKeyDown(KeyCode.F5)) PachaCheats.GrowCrops();
         
         if (Input.GetKeyDown(KeyCode.F6)) PachaCheats.GrowTrees();
         
-        if (Input.GetKeyDown(KeyCode.F7)) PachaCheats.DestroyHittableResources();
+        if (Input.GetKeyDown(KeyCode.F8)) PachaCheats.DestroyHittableResources();
+        
+        if (Input.GetKeyDown(KeyCode.F9)) PachaCheats.GetPlayerCurrentCoords();
     }
 
     public void DrawGui()

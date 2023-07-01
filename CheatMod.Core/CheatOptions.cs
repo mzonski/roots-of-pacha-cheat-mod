@@ -19,6 +19,7 @@ public class CheatOptions
     public static bool DrawUI { get; set; } = true;
     public static bool DrawItemSpawnerWindow { get; set; }
     public static bool DrawTimeManagerWindow { get; set; }
+    public static bool DrawTeleportWindow { get; set; }
 
     #endregion
 }
