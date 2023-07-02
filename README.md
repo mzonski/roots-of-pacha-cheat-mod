@@ -31,6 +31,7 @@ This repository contains a cheat mod for Roots of Pacha game that can be used to
 - Destroy hittable resources in range
 - Teleports to waypoints
 - Animals always well-fed
+- Animal herd shuffler
 
 ## Keys
 | Key | Function                   |
@@ -39,3 +40,4 @@ This repository contains a cheat mod for Roots of Pacha game that can be used to
 | F5  | Grow crops in 3f range     |
 | F6  | Grow trees in 3f range     |
 | F8  | Destroy hittable resources |
+| F11 | Shuffle animal herd        |
