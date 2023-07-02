@@ -309,7 +309,7 @@ public class PachaCheats
                     {
                         if (!caveRoom.Stage.GetComponent<Collider2D>().OverlapPoint(psc.transform.position)) continue;
 
-                        foreach (var hittableEntity in caveRoom.CurrentHittables.ToList())
+                        foreach (var hittableEntity in caveRoom.CurrentHittables.Where(ch => ch is not null).ToList())
                         {
                             if (Vector2.Distance(hittableEntity.transform.position, psc.transform.position) < range)
                             {
@@ -318,7 +318,7 @@ public class PachaCheats
                             }
                         }
 
-                        foreach (var shim in caveRoom.CurrentCaveOresShams.ToList())
+                        foreach (var shim in caveRoom.CurrentCaveOresShams.Where(sh => sh is not null).ToList())
                         {
                             if (Vector2.Distance(shim.transform.position, psc.transform.position) < range &&
                                 shim.Health.CurrentHealth > 0f)

@@ -109,6 +109,7 @@
         <Compile Include="PachaItemDb.cs" />
         <Compile Include="PachaManager.cs" />
         <Compile Include="PachaUtils.cs" />
+        <Compile Include="Patches\EasyAnimals.cs" />
         <Compile Include="Patches\EasyFishing.cs" />
         <Compile Include="Patches\FreezeTime.cs" />
         <Compile Include="Patches\InfiniteFlute.cs" />
