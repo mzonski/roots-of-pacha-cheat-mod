@@ -19,6 +19,7 @@ public class PachaCheatUI
             { CheatWindowType.PlayerStats, new PlayerStatsWindow(manager) },
             { CheatWindowType.TimeManager, new TimeManagerWindow(manager) },
             { CheatWindowType.Teleports, new TeleportWindow(manager) },
+            { CheatWindowType.ShuffleAnimals, new AnimalShuffleWindow(manager) },
         };
     }
 

@@ -7,4 +7,5 @@ public enum CheatWindowType
     PlayerStats = 2,
     TimeManager = 3,
     Teleports = 4,
+    ShuffleAnimals = 5,
 }

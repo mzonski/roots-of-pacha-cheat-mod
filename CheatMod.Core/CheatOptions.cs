@@ -21,6 +21,7 @@ public class CheatOptions
     public static bool DrawItemSpawnerWindow { get; set; }
     public static bool DrawTimeManagerWindow { get; set; }
     public static bool DrawTeleportWindow { get; set; }
+    public static bool DrawAnimalShuffleWindow { get; set; }
 
     #endregion
 }

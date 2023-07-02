@@ -104,6 +104,7 @@
     <ItemGroup>
         <Compile Include="BuildInfo.cs" />
         <Compile Include="CheatOptions.cs" />
+        <Compile Include="Extensions\CollectionExtensions.cs" />
         <Compile Include="Extensions\GuidExtensions.cs" />
         <Compile Include="PachaCheats.cs" />
         <Compile Include="PachaItemDb.cs" />
@@ -125,6 +126,7 @@
         <Compile Include="UI\CheatUIStyles.cs" />
         <Compile Include="UI\CheatWindowType.cs" />
         <Compile Include="UI\PachaCheatUI.cs" />
+        <Compile Include="UI\Windows\AnimalShuffleWindow.cs" />
         <Compile Include="UI\Windows\ItemSpawnerWindow.cs" />
         <Compile Include="UI\Windows\MainWindow.cs" />
         <Compile Include="UI\Windows\PlayerStatsWindow.cs" />

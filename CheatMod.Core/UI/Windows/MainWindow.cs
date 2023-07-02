@@ -81,6 +81,17 @@ public class MainWindow : PachaCheatWindow
         CheatOptions.DrawTeleportWindow = true;
     }
 
+    private void HandleOpenAnimalShuffleWindow()
+    {
+        if (CheatOptions.DrawAnimalShuffleWindow)
+        {
+            CheatOptions.DrawAnimalShuffleWindow = false;
+            return;
+        }
+
+        CheatOptions.DrawAnimalShuffleWindow = true;
+    }
+
     protected override void DrawInternal(int windowId)
     {
         GUILayout.BeginVertical();
@@ -120,6 +131,9 @@ public class MainWindow : PachaCheatWindow
 
         if (GUILayout.Button(!CheatOptions.DrawTeleportWindow ? "Open teleports" : "Close teleports"))
             HandleOpenTeleportsClick();
+        
+        if (GUILayout.Button(!CheatOptions.DrawAnimalShuffleWindow ? "Open animal shuffler" : "Close animal shuffler"))
+            HandleOpenAnimalShuffleWindow();
 
         GUILayout.EndVertical();
 

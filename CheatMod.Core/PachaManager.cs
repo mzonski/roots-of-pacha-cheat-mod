@@ -30,6 +30,8 @@ public class PachaManager
         if (Input.GetKeyDown(KeyCode.F8)) PachaCheats.DestroyHittableResources();
         
         if (Input.GetKeyDown(KeyCode.F9)) PachaCheats.GetPlayerCurrentCoords();
+        
+        if (Input.GetKeyDown(KeyCode.F11)) PachaCheats.ReplaceAnimalInHerdWithinRange();
     }
 
     public void DrawGui()
