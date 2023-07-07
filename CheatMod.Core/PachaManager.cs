@@ -31,6 +31,8 @@ public class PachaManager
         
         if (Input.GetKeyDown(KeyCode.F9)) PachaCheats.GetPlayerCurrentCoords();
         
+        if (Input.GetKeyDown(KeyCode.F10)) PachaCheats.DumpEntitiesInRange();
+        
         if (Input.GetKeyDown(KeyCode.F11)) PachaCheats.ReplaceAnimalInHerdWithinRange();
     }
 

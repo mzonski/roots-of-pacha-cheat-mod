@@ -365,7 +365,7 @@ public class PachaCheats
         return player.PlayerStateController.PositionWithDirection;
     }
 
-    public void DumpEntities()
+    public void DumpInventoryItems()
     {
         var inventoryItems = new List<InventoryItem>();
         var types = new HashSet<string>();
@@ -530,6 +530,17 @@ public class PachaCheats
         {
             _logger.Log("[Spawn animals] Failed: " + ex.Message);
             _logger.Log(ex.StackTrace);
+        }
+    }
+
+    public void DumpEntitiesInRange(float range = 3f)
+    {
+        var entities = GetEntityDataInRange(range)
+            .Where(entity => entity is not null);
+
+        foreach (var entityData in entities)
+        {
+            _logger.Log($@"[{entityData.Type}]: {entityData.ID}");
         }
     }
 }
