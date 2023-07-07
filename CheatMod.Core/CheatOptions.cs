@@ -14,6 +14,8 @@ public class CheatOptions
     public static float PlayerMovementSpeed { get; set; } = 4f;
     public static bool IsInfiniteHarvestEnabled { get; set; } = false;
 
+    public static bool IsFastProductionEnabled { get; set; } = true;
+
     #endregion
 
     #region UI Options

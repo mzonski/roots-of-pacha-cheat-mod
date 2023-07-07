@@ -112,6 +112,7 @@
         <Compile Include="PachaUtils.cs" />
         <Compile Include="Patches\EasyAnimals.cs" />
         <Compile Include="Patches\EasyFishing.cs" />
+        <Compile Include="Patches\FastProduction.cs" />
         <Compile Include="Patches\FreezeTime.cs" />
         <Compile Include="Patches\InfiniteFlute.cs" />
         <Compile Include="Patches\InfiniteHarvest.cs" />

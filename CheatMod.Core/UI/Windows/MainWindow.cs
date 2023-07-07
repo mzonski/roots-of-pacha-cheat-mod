@@ -112,6 +112,8 @@ public class MainWindow : PachaCheatWindow
             "Movement speedhack", CheatUIStyles.Toggle);
         CheatOptions.IsInfiniteHarvestEnabled = GUILayout.Toggle(CheatOptions.IsInfiniteHarvestEnabled,
             "Infinite harvest", CheatUIStyles.Toggle);
+        CheatOptions.IsFastProductionEnabled = GUILayout.Toggle(CheatOptions.IsFastProductionEnabled,
+            "Fast production", CheatUIStyles.Toggle);
 
         GUILayout.Space(20);
 
