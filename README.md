@@ -32,6 +32,7 @@ This repository contains a cheat mod for Roots of Pacha game that can be used to
 - Teleports to waypoints
 - Animals always well-fed
 - Animal herd shuffler
+- Fast production
 
 ## Keys
 | Key | Function                   |
