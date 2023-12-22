@@ -319,19 +319,26 @@ public class PachaCheats
                             }
                         }
 
-                        foreach (var shim in caveRoom.CurrentCaveOresShams.Where(sh => sh is not null).ToList())
+                        foreach (var shim in caveRoom.CurrentCaveOresShims.Where(sh => sh is not null).ToList())
                         {
                             if (Vector2.Distance(shim.transform.position, psc.transform.position) < range &&
-                                shim.Health.CurrentHealth > 0f)
+                                shim.CurrentHealth > 0f)
                             {
-                                shim.Health.DecreaseHealth(shim.Health.CurrentHealth);
+                                var caveOreShinType = shim.GetType()
+                                    .GetProperty("Health", BindingFlags.NonPublic | BindingFlags.Instance);
+                                if (caveOreShinType == null) return;
+                                var healthComponent = (HealthComponent)caveOreShinType.GetValue(shim);
+                                if (healthComponent.CurrentHealth > 0f)
+                                {
+                                    healthComponent.DecreaseHealth(healthComponent.CurrentHealth);
+                                }
 
                                 if (Application.isPlaying)
                                     caveRoom.Pool.Release(shim);
                                 else
                                     Object.DestroyImmediate(shim.gameObject);
 
-                                caveRoom.CurrentCaveOresShams.Remove(shim);
+                                caveRoom.CurrentCaveOresShims.Remove(shim);
                             }
                         }
                     }

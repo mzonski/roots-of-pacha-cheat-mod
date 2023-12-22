@@ -1,5 +1,4 @@
 using CheatMod.Core;
-using CheatMod.Core.Patches;
 using MelonLoader;
 
 namespace CheatMod.MelonLoader;
@@ -10,7 +9,6 @@ public class CheatMod : MelonMod
 
     public override void OnInitializeMelon()
     {
-        HarmonyInstance.PatchAll(typeof(CheatModPatches));
     }
 
     public override void OnUpdate()

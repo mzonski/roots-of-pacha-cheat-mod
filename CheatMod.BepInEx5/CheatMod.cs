@@ -1,7 +1,6 @@
 ﻿using BepInEx;
 using CheatMod.Core;
-using CheatMod.Core.Patches;
-using HarmonyLib;
+using UnityEngine;
 
 namespace CheatMod.BepInEx5;
 
@@ -14,7 +13,6 @@ public class CheatMod : BaseUnityPlugin
     private void Awake()
     {
         Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
-        Harmony.CreateAndPatchAll(typeof(CheatModPatches));
     }
 
     private void Update()
@@ -25,5 +23,11 @@ public class CheatMod : BaseUnityPlugin
     public void OnGUI()
     {
         PachaManager.DrawGui();
+    }
+    
+    private void OnDestroy()
+    {
+        Destroy(gameObject);
+        Debug.Log("Mod has been unloaded!");
     }
 }
