@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace CheatMod.Core.UI.Windows;
 
-
 public class MainWindow : PachaCheatWindow
 {
     private Rect _mainWindow = new(16, 16, 200, 450);
@@ -11,88 +10,12 @@ public class MainWindow : PachaCheatWindow
     {
     }
 
-    private bool _isWaterAllTilesClicked;
-    private bool IsWaterAllTilesClicked
+    public override void Draw()
     {
-        set
-        {
-            if (_isWaterAllTilesClicked == value) return;
-            _isWaterAllTilesClicked = value;
-            if (value)
-                Manager.PachaCheats.WaterAllTilledTiles();
-        }
+        _mainWindow = GUILayout.Window(CheatWindowType.Main, _mainWindow, DrawWindow, "Pacha Cheat");
     }
 
-    private bool _isGrowCropsAroundClicked;
-    private bool IsGrowCropsAroundClicked
-    {
-        set
-        {
-            if (_isGrowCropsAroundClicked == value) return;
-            _isGrowCropsAroundClicked = value;
-            if (value)
-                Manager.PachaCheats.GrowCrops(9f);
-        }
-    }
-    
-    private bool _isGrowTreesAroundClicked;
-    private bool IsGrowTreesAroundClicked
-    {
-        set
-        {
-            if (_isGrowTreesAroundClicked == value) return;
-            _isGrowTreesAroundClicked = value;
-            if (value)
-                Manager.PachaCheats.GrowTrees(9f);
-        }
-    }
-
-    private void HandleOpenItemSpawnerClick()
-    {
-        if (CheatOptions.DrawItemSpawnerWindow)
-        {
-            CheatOptions.DrawItemSpawnerWindow = false;
-            return;
-        }
-
-        Manager.ItemDb.Refresh();
-        CheatOptions.DrawItemSpawnerWindow = true;
-    }
-
-    private void HandleOpenTimeManagerClick()
-    {
-        if (CheatOptions.DrawTimeManagerWindow)
-        {
-            CheatOptions.DrawTimeManagerWindow = false;
-            return;
-        }
-
-        CheatOptions.DrawTimeManagerWindow = true;
-    }
-
-    private void HandleOpenTeleportsClick()
-    {
-        if (CheatOptions.DrawTeleportWindow)
-        {
-            CheatOptions.DrawTeleportWindow = false;
-            return;
-        }
-
-        CheatOptions.DrawTeleportWindow = true;
-    }
-
-    private void HandleOpenAnimalShuffleWindow()
-    {
-        if (CheatOptions.DrawAnimalShuffleWindow)
-        {
-            CheatOptions.DrawAnimalShuffleWindow = false;
-            return;
-        }
-
-        CheatOptions.DrawAnimalShuffleWindow = true;
-    }
-
-    protected override void DrawInternal(int windowId)
+    protected override void DrawWindow(int windowId)
     {
         GUILayout.BeginVertical();
 
@@ -117,34 +40,45 @@ public class MainWindow : PachaCheatWindow
 
         GUILayout.Space(20);
 
-        IsWaterAllTilesClicked = GUILayout.Button("Water all crops");
-        IsGrowCropsAroundClicked = GUILayout.Button("Grow crops around");
-        IsGrowTreesAroundClicked = GUILayout.Button("Grow trees around");
-        
+        if (GUILayout.Button("Water all crops"))
+            Manager.PachaCheats.WaterAllTilledTiles();
+
+        if (GUILayout.Button("Grow crops around"))
+            Manager.PachaCheats.GrowCrops(9f);
+
+        if (GUILayout.Button("Grow trees around"))
+            Manager.PachaCheats.GrowTrees(9f);
+
         GUILayout.Space(20);
 
         GUILayout.FlexibleSpace();
 
         if (GUILayout.Button(!CheatOptions.DrawItemSpawnerWindow ? "Open item spawner" : "Close item spawner"))
-            HandleOpenItemSpawnerClick();
+            ToggleItemSpawnerWindow();
 
         if (GUILayout.Button(!CheatOptions.DrawTimeManagerWindow ? "Open time manager" : "Close time manager"))
-            HandleOpenTimeManagerClick();
+            CheatOptions.DrawTimeManagerWindow = !CheatOptions.DrawTimeManagerWindow;
 
         if (GUILayout.Button(!CheatOptions.DrawTeleportWindow ? "Open teleports" : "Close teleports"))
-            HandleOpenTeleportsClick();
-        
+            CheatOptions.DrawTeleportWindow = !CheatOptions.DrawTeleportWindow;
+
         if (GUILayout.Button(!CheatOptions.DrawAnimalShuffleWindow ? "Open animal shuffler" : "Close animal shuffler"))
-            HandleOpenAnimalShuffleWindow();
+            CheatOptions.DrawAnimalShuffleWindow = !CheatOptions.DrawAnimalShuffleWindow;
 
         GUILayout.EndVertical();
 
         GUI.DragWindow();
     }
 
-    public override void Draw()
+    private void ToggleItemSpawnerWindow()
     {
-        _mainWindow = GUILayout.Window((int)CheatWindowType.Main, _mainWindow, DrawInternal, "Pacha Cheat");
-    }
+        if (CheatOptions.DrawItemSpawnerWindow)
+        {
+            CheatOptions.DrawItemSpawnerWindow = false;
+            return;
+        }
 
+        Manager.ItemDb.Refresh();
+        CheatOptions.DrawItemSpawnerWindow = true;
+    }
 }

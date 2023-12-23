@@ -69,10 +69,13 @@
 
     <ItemGroup>
         <Reference Include="0Harmony">
-            <HintPath>D:\Steam\steamapps\common\Roots of Pacha\MelonLoader\net35\0Harmony.dll</HintPath>
+          <HintPath>D:\Steam\steamapps\common\Roots of Pacha\BepInEx\core\0Harmony.dll</HintPath>
         </Reference>
         <Reference Include="Assembly-CSharp">
             <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="BepInEx">
+          <HintPath>D:\Steam\steamapps\common\Roots of Pacha\BepInEx\core\BepInEx.dll</HintPath>
         </Reference>
         <Reference Include="MamboJamboStudios.UnityAtomsCore.Runtime">
             <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\MamboJamboStudios.UnityAtomsCore.Runtime.dll</HintPath>

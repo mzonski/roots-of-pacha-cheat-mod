@@ -9,7 +9,7 @@ public class CheatModHarmony : Harmony
     {
     }
 
-    public void PatchAll()
+    public void ApplyPatches()
     {
         var processor = new PatchClassProcessor(this, typeof(CheatModPatches), true);
         processor.Patch();

@@ -12,15 +12,14 @@ public class PachaManager
     public readonly IModLogger Logger;
     private readonly CheatModHarmony Harmony;
 
-    public PachaManager(PachaItemDb itemDb, IModLogger logger)
+    public PachaManager(PachaItemDb itemDb, IModLogger logger, CheatModHarmony harmony)
     {
         Logger = logger;
         ItemDb = itemDb;
+        Harmony = harmony;
+        
         PachaCheats = new PachaCheats(logger);
         _cheatUI = new PachaCheatUI(this);
-        Harmony = new CheatModHarmony();
-        
-        Harmony.PatchAll();
     }
 
     public void CatchKeyboardInput()

@@ -52,7 +52,7 @@ public class TimeManagerWindow : PachaCheatWindow
         Manager.PachaCheats.SetTime(SelectedTime);
     }
 
-    protected override void DrawInternal(int windowId)
+    protected override void DrawWindow(int windowId)
     {
         GUILayout.BeginVertical();
 
@@ -78,6 +78,6 @@ public class TimeManagerWindow : PachaCheatWindow
     public override void Draw()
     {
         if (!CheatOptions.DrawTimeManagerWindow) return;
-        _timeManagerWindow = GUILayout.Window((int)CheatWindowType.TimeManager, _timeManagerWindow, DrawInternal, "Pacha Time Manager");
+        _timeManagerWindow = GUILayout.Window(CheatWindowType.TimeManager, _timeManagerWindow, DrawWindow, "Pacha Time Manager");
     }
 }

@@ -9,7 +9,7 @@ public abstract class PachaCheatWindow
         Manager = manager;
     }
 
-    protected abstract void DrawInternal(int windowId);
+    protected abstract void DrawWindow(int windowId);
 
     public abstract void Draw();
 }

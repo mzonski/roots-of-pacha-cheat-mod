@@ -9,8 +9,15 @@ public class PlayerStatsWindow : PachaCheatWindow
     public PlayerStatsWindow(PachaManager manager) : base(manager)
     {
     }
+    
+    public override void Draw()
+    {
+        if (CheatOptions.IsMovementSpeedEnabled)
+            _statsWindow = GUILayout.Window(CheatWindowType.PlayerStats, _statsWindow, DrawWindow,
+                "Pacha Player Stats");
+    }
 
-    protected override void DrawInternal(int windowId)
+    protected override void DrawWindow(int windowId)
     {
         GUILayout.BeginVertical();
 
@@ -22,12 +29,5 @@ public class PlayerStatsWindow : PachaCheatWindow
         GUILayout.EndVertical();
 
         GUI.DragWindow();
-    }
-
-    public override void Draw()
-    {
-        if (CheatOptions.IsMovementSpeedEnabled)
-            _statsWindow = GUILayout.Window((int)CheatWindowType.PlayerStats, _statsWindow, DrawInternal,
-                "Pacha Player Stats");
     }
 }

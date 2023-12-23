@@ -15,15 +15,10 @@ public class ItemSpawnerWindow : PachaCheatWindow
 
     private bool _isFirstRender;
     private int _itemQty = 1;
-    private string _itemsFilterBy = string.Empty;
     private Vector2 _scrollPosition = Vector2.zero;
     private int _selectedItemId = -1;
-
-    public ItemSpawnerWindow(PachaManager manager) : base(manager)
-    {
-        _itemQualityOptions = CreateItemQualityOptions();
-    }
-
+    private string _itemsFilterBy = string.Empty;
+    
     private string ItemsFilterBy
     {
         get => _itemsFilterBy;
@@ -34,37 +29,21 @@ public class ItemSpawnerWindow : PachaCheatWindow
             SetSelectedListItems();
         }
     }
-
-    private ItemQuality _itemQuality = ItemQuality.Best;
-
-    private ItemQuality ItemQuality
-    {
-        get => _itemQuality;
-        set
-        {
-            if (_itemQuality == value) return;
-            _itemQuality = value;
-        }
-    }
-
-
     private int SelectedQualityIndex { get; set; }
 
-    private GUIContent[] CreateItemQualityOptions()
+    public ItemSpawnerWindow(PachaManager manager) : base(manager)
     {
-        var values = Enum.GetValues(typeof(ItemQuality));
-        var list = new List<GUIContent>();
-
-        foreach (byte valueObj in values)
-        {
-            var name = Enum.GetName(typeof(ItemQuality), valueObj);
-            list.Add(new GUIContent(name, valueObj.ToString()));
-        }
-
-        return list.ToArray();
+        _itemQualityOptions = CreateItemQualityOptions();
+    }
+    
+    public override void Draw()
+    {
+        if (CheatOptions.DrawItemSpawnerWindow)
+            _itemSpawnerWindow = GUILayout.Window(CheatWindowType.ItemSpawner, _itemSpawnerWindow, DrawWindow,
+                "Pacha Item Spawner");
     }
 
-    protected override void DrawInternal(int windowId)
+    protected override void DrawWindow(int windowId)
     {
         if (_isFirstRender == false)
         {
@@ -115,13 +94,6 @@ public class ItemSpawnerWindow : PachaCheatWindow
         GUI.DragWindow();
     }
 
-    public override void Draw()
-    {
-        if (CheatOptions.DrawItemSpawnerWindow)
-            _itemSpawnerWindow = GUILayout.Window((int)CheatWindowType.ItemSpawner, _itemSpawnerWindow, DrawInternal,
-                "Pacha Item Spawner");
-    }
-
     private void SetSelectedListItems()
     {
         var filteredList = ItemsFilterBy is not null
@@ -130,5 +102,19 @@ public class ItemSpawnerWindow : PachaCheatWindow
             : Array.Empty<InventoryItem>();
 
         _currentListItems = filteredList.Select(ii => new GUIContent(ii.Name, ii.ID.ToString())).ToArray();
+    }
+        
+    private static GUIContent[] CreateItemQualityOptions()
+    {
+        var values = Enum.GetValues(typeof(ItemQuality));
+        var list = new List<GUIContent>();
+
+        foreach (byte valueObj in values)
+        {
+            var name = Enum.GetName(typeof(ItemQuality), valueObj);
+            list.Add(new GUIContent(name, valueObj.ToString()));
+        }
+
+        return list.ToArray();
     }
 }

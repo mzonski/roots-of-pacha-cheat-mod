@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using CheatMod.Core.Extensions;
 using CheatMod.Core.Services;
+using CheatMod.Core.Utils;
 using JetBrains.Annotations;
 using Photon.Pun;
 using SodaDen.Pacha;
@@ -279,6 +280,11 @@ public class PachaCheats
         {
             healthComponent.DecreaseHealth(healthComponent.CurrentHealth);
         }
+    }
+
+    public void TeleportPlayer(TeleportCoordinates coords)
+    {
+        this.TeleportPlayer(coords.X, coords.Y);
     }
 
     public void TeleportPlayer(float x, float y)
