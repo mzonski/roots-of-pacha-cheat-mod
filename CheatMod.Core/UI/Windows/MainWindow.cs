@@ -19,24 +19,24 @@ public class MainWindow : PachaCheatWindow
     {
         GUILayout.BeginVertical();
 
-        CheatOptions.IsEasyFishingEnabled =
-            GUILayout.Toggle(CheatOptions.IsEasyFishingEnabled, "Easy fishing", CheatUIStyles.Toggle);
-        CheatOptions.IsInfiniteFluteEnabled =
-            GUILayout.Toggle(CheatOptions.IsInfiniteFluteEnabled, "Infinite flute", CheatUIStyles.Toggle);
-        CheatOptions.IsEasyAnimalsEnabled =
-            GUILayout.Toggle(CheatOptions.IsEasyAnimalsEnabled, "Easy animals", CheatUIStyles.Toggle);
-        CheatOptions.IsInfiniteSeedsEnabled =
-            GUILayout.Toggle(CheatOptions.IsInfiniteSeedsEnabled, "Infinite seeds", CheatUIStyles.Toggle);
-        CheatOptions.IsInfiniteStaminaEnabled =
-            GUILayout.Toggle(CheatOptions.IsInfiniteStaminaEnabled, "Infinite stamina", CheatUIStyles.Toggle);
-        CheatOptions.IsInfiniteWaterToolEnabled = GUILayout.Toggle(CheatOptions.IsInfiniteWaterToolEnabled,
-            "Infinite water tool", CheatUIStyles.Toggle);
-        CheatOptions.IsMovementSpeedEnabled = GUILayout.Toggle(CheatOptions.IsMovementSpeedEnabled,
-            "Movement speedhack", CheatUIStyles.Toggle);
-        CheatOptions.IsInfiniteHarvestEnabled = GUILayout.Toggle(CheatOptions.IsInfiniteHarvestEnabled,
-            "Infinite harvest", CheatUIStyles.Toggle);
-        CheatOptions.IsFastProductionEnabled = GUILayout.Toggle(CheatOptions.IsFastProductionEnabled,
-            "Fast production", CheatUIStyles.Toggle);
+        CheatOptions.Instance.IsEasyFishingEnabled.Value = GUILayout.Toggle(
+            CheatOptions.Instance.IsEasyFishingEnabled.Value, "Easy fishing", CheatUIStyles.Toggle);
+        CheatOptions.Instance.IsInfiniteFluteEnabled.Value = GUILayout.Toggle(
+            CheatOptions.Instance.IsInfiniteFluteEnabled.Value, "Infinite flute", CheatUIStyles.Toggle);
+        CheatOptions.Instance.IsEasyAnimalsEnabled.Value = GUILayout.Toggle(
+            CheatOptions.Instance.IsEasyAnimalsEnabled.Value, "Easy animals", CheatUIStyles.Toggle);
+        CheatOptions.Instance.IsInfiniteSeedsEnabled.Value = GUILayout.Toggle(
+            CheatOptions.Instance.IsInfiniteSeedsEnabled.Value, "Infinite seeds", CheatUIStyles.Toggle);
+        CheatOptions.Instance.IsInfiniteStaminaEnabled.Value = GUILayout.Toggle(
+            CheatOptions.Instance.IsInfiniteStaminaEnabled.Value, "Infinite stamina", CheatUIStyles.Toggle);
+        CheatOptions.Instance.IsInfiniteWaterToolEnabled.Value = GUILayout.Toggle(
+            CheatOptions.Instance.IsInfiniteWaterToolEnabled.Value, "Infinite water tool", CheatUIStyles.Toggle);
+        CheatOptions.Instance.IsMovementSpeedEnabled.Value = GUILayout.Toggle(
+            CheatOptions.Instance.IsMovementSpeedEnabled.Value, "Movement speedhack", CheatUIStyles.Toggle);
+        CheatOptions.Instance.IsInfiniteHarvestEnabled.Value = GUILayout.Toggle(
+            CheatOptions.Instance.IsInfiniteHarvestEnabled.Value, "Infinite harvest", CheatUIStyles.Toggle);
+        CheatOptions.Instance.IsFastProductionEnabled.Value = GUILayout.Toggle(
+            CheatOptions.Instance.IsFastProductionEnabled.Value, "Fast production", CheatUIStyles.Toggle);
 
         GUILayout.Space(20);
 
@@ -53,17 +53,21 @@ public class MainWindow : PachaCheatWindow
 
         GUILayout.FlexibleSpace();
 
-        if (GUILayout.Button(!CheatOptions.DrawItemSpawnerWindow ? "Open item spawner" : "Close item spawner"))
+        if (GUILayout.Button(
+                !CheatOptions.Instance.DrawItemSpawnerWindow.Value ? "Open item spawner" : "Close item spawner"))
             ToggleItemSpawnerWindow();
 
-        if (GUILayout.Button(!CheatOptions.DrawTimeManagerWindow ? "Open time manager" : "Close time manager"))
-            CheatOptions.DrawTimeManagerWindow = !CheatOptions.DrawTimeManagerWindow;
+        if (GUILayout.Button(
+                !CheatOptions.Instance.DrawTimeManagerWindow.Value ? "Open time manager" : "Close time manager"))
+            CheatOptions.Instance.DrawTimeManagerWindow.Value = !CheatOptions.Instance.DrawTimeManagerWindow.Value;
 
-        if (GUILayout.Button(!CheatOptions.DrawTeleportWindow ? "Open teleports" : "Close teleports"))
-            CheatOptions.DrawTeleportWindow = !CheatOptions.DrawTeleportWindow;
+        if (GUILayout.Button(!CheatOptions.Instance.DrawTeleportWindow.Value ? "Open teleports" : "Close teleports"))
+            CheatOptions.Instance.DrawTeleportWindow.Value = !CheatOptions.Instance.DrawTeleportWindow.Value;
 
-        if (GUILayout.Button(!CheatOptions.DrawAnimalShuffleWindow ? "Open animal shuffler" : "Close animal shuffler"))
-            CheatOptions.DrawAnimalShuffleWindow = !CheatOptions.DrawAnimalShuffleWindow;
+        if (GUILayout.Button(!CheatOptions.Instance.DrawAnimalShuffleWindow.Value
+                ? "Open animal shuffler"
+                : "Close animal shuffler"))
+            CheatOptions.Instance.DrawAnimalShuffleWindow.Value = !CheatOptions.Instance.DrawAnimalShuffleWindow.Value;
 
         GUILayout.EndVertical();
 
@@ -72,13 +76,13 @@ public class MainWindow : PachaCheatWindow
 
     private void ToggleItemSpawnerWindow()
     {
-        if (CheatOptions.DrawItemSpawnerWindow)
+        if (CheatOptions.Instance.DrawItemSpawnerWindow.Value)
         {
-            CheatOptions.DrawItemSpawnerWindow = false;
+            CheatOptions.Instance.DrawItemSpawnerWindow.Value = false;
             return;
         }
 
         Manager.ItemDb.Refresh();
-        CheatOptions.DrawItemSpawnerWindow = true;
+        CheatOptions.Instance.DrawItemSpawnerWindow.Value = true;
     }
 }

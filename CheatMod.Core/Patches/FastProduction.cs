@@ -10,7 +10,7 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool ManualProducerProductTimeout(ref float __result)
     {
-        if (!CheatOptions.IsFastProductionEnabled) return true;
+        if (!CheatOptions.Instance.IsFastProductionEnabled.Value) return true;
         __result = 0.2f;
         return false;
     }
@@ -19,7 +19,7 @@ public partial class CheatModPatches
     [HarmonyPostfix]
     private static float ManualProducerTimeout(float value)
     {
-        if (!CheatOptions.IsFastProductionEnabled) return value;
+        if (!CheatOptions.Instance.IsFastProductionEnabled.Value) return value;
         if (value > 0.2f)
         {
             return 0.2f;
@@ -32,7 +32,7 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static void AutoProducerHasFuel(ref AutoProducerEntity __instance)
     {
-        if (!CheatOptions.IsFastProductionEnabled) return;
+        if (!CheatOptions.Instance.IsFastProductionEnabled.Value) return;
         foreach (var currentConversion in __instance.CurrentConversions.Where(c => c is not null))
         {
             currentConversion.StartedOnDayTime = 1.0f;

@@ -22,7 +22,7 @@ public class PachaCheatUI
 
     public void Draw()
     {
-        if (!CheatOptions.DrawUI)
+        if (!CheatOptions.Instance.DrawUI.Value)
             return;
 
         foreach (var window in _windows.Values) window.Draw();

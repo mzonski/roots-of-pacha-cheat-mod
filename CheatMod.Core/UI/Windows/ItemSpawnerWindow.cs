@@ -38,7 +38,7 @@ public class ItemSpawnerWindow : PachaCheatWindow
     
     public override void Draw()
     {
-        if (CheatOptions.DrawItemSpawnerWindow)
+        if (CheatOptions.Instance.DrawItemSpawnerWindow.Value)
             _itemSpawnerWindow = GUILayout.Window(CheatWindowType.ItemSpawner, _itemSpawnerWindow, DrawWindow,
                 "Pacha Item Spawner");
     }

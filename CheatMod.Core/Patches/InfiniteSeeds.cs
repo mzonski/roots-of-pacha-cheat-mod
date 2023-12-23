@@ -9,6 +9,6 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool InfiniteSeedsPatch()
     {
-        return !CheatOptions.IsInfiniteSeedsEnabled;
+        return !CheatOptions.Instance.IsInfiniteSeedsEnabled.Value;
     }
 }

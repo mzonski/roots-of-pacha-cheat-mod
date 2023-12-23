@@ -60,6 +60,9 @@
         <Reference Include="MonoMod.Utils, Version=22.3.23.4, Culture=neutral, processorArchitecture=MSIL">
           <HintPath>..\packages\MonoMod.Utils.22.3.23.4\lib\net452\MonoMod.Utils.dll</HintPath>
         </Reference>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\Newtonsoft.Json.dll</HintPath>
+        </Reference>
         <Reference Include="PhotonRealtime">
           <HintPath>D:\Steam\steamapps\common\Roots of Pacha\Roots of Pacha_Data\Managed\PhotonRealtime.dll</HintPath>
         </Reference>
@@ -136,6 +139,7 @@
         <Compile Include="UI\Windows\PlayerStatsWindow.cs" />
         <Compile Include="UI\Windows\TeleportWindow.cs" />
         <Compile Include="UI\Windows\TimeManagerWindow.cs" />
+        <Compile Include="Utils\SettingEntry.cs" />
         <Compile Include="Utils\SequenceSkipBuilder.cs" />
         <Compile Include="Utils\TeleportCoordinates.cs" />
     </ItemGroup>

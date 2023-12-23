@@ -20,11 +20,13 @@ public class PachaManager
         
         PachaCheats = new PachaCheats(logger);
         _cheatUI = new PachaCheatUI(this);
+
+        CheatOptions.Load();
     }
 
     public void CatchKeyboardInput()
     {
-        if (Input.GetKeyDown(KeyCode.F2)) CheatOptions.DrawUI = !CheatOptions.DrawUI;
+        if (Input.GetKeyDown(KeyCode.F2)) CheatOptions.Instance.DrawUI.Value = !CheatOptions.Instance.DrawUI.Value;
         
         if (Input.GetKeyDown(KeyCode.F5)) PachaCheats.GrowCrops();
         

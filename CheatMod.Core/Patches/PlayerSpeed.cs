@@ -9,7 +9,7 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool PlayerStateMaxSpeedPatch(ref float? __result)
     {
-        if (!CheatOptions.IsMovementSpeedEnabled) return true;
+        if (!CheatOptions.Instance.IsMovementSpeedEnabled.Value) return true;
         __result = 100f;
         return false;
     }
@@ -19,8 +19,8 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool PlayerStateSpeedPatch(ref float __result)
     {
-        if (!CheatOptions.IsMovementSpeedEnabled) return true;
-        __result = CheatOptions.PlayerMovementSpeed;
+        if (!CheatOptions.Instance.IsMovementSpeedEnabled.Value) return true;
+        __result = CheatOptions.Instance.PlayerMovementSpeed.Value;
         return false;
     }
 }

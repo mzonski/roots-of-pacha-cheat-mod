@@ -10,7 +10,7 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool InfinitePlantHarvestPatch(PlantEntity __instance, ref string __result)
     {
-        if (!CheatOptions.IsInfiniteHarvestEnabled)
+        if (!CheatOptions.Instance.IsInfiniteHarvestEnabled.Value)
             return true;
 
         __result = $"{__instance.ID}-{__instance.CurrentDay}-${Random.Range(1, int.MaxValue)}";
@@ -21,7 +21,7 @@ public partial class CheatModPatches
     [HarmonyPostfix]
     private static void InfiniteTreeHarvestPatch(TreeEntity __instance, ref MagneticItemData[] __result)
     {
-        if (!CheatOptions.IsInfiniteHarvestEnabled)
+        if (!CheatOptions.Instance.IsInfiniteHarvestEnabled.Value)
             return;
 
         for (var i = 0; i < __result.Length; i++) __result[i].ID = $"{__result[i].ID}-${Random.Range(1, int.MaxValue)}";

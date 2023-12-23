@@ -13,7 +13,7 @@ public class TeleportWindow : PachaCheatWindow
     
     public override void Draw()
     {
-        if (!CheatOptions.DrawTeleportWindow) return;
+        if (!CheatOptions.Instance.DrawTeleportWindow.Value) return;
         _teleportWindowRect = GUILayout.Window(CheatWindowType.Teleports, _teleportWindowRect, DrawWindow, "Teleports");
     }
 

@@ -12,7 +12,7 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool SkipAttuneMinigamePatch(ref UniTask<int> __result)
     {
-        if (!CheatOptions.IsEasyAnimalsEnabled)
+        if (!CheatOptions.Instance.IsEasyAnimalsEnabled.Value)
             return true;
         
         __result = UniTask.FromResult(4);
@@ -23,7 +23,7 @@ public partial class CheatModPatches
     [HarmonyPostfix]
     private static void AnimalEntityAutoFeed(AnimalEntity __instance)
     {
-        if (!CheatOptions.IsEasyAnimalsEnabled) return;
+        if (!CheatOptions.Instance.IsEasyAnimalsEnabled.Value) return;
 
         if (__instance.IsTamed || __instance.IsPet)
         {

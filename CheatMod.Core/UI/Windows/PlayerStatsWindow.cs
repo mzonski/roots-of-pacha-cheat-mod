@@ -9,10 +9,10 @@ public class PlayerStatsWindow : PachaCheatWindow
     public PlayerStatsWindow(PachaManager manager) : base(manager)
     {
     }
-    
+
     public override void Draw()
     {
-        if (CheatOptions.IsMovementSpeedEnabled)
+        if (CheatOptions.Instance.IsMovementSpeedEnabled.Value)
             _statsWindow = GUILayout.Window(CheatWindowType.PlayerStats, _statsWindow, DrawWindow,
                 "Pacha Player Stats");
     }
@@ -23,8 +23,9 @@ public class PlayerStatsWindow : PachaCheatWindow
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Movement speed");
-        CheatOptions.PlayerMovementSpeed =
-            (int)GUI.HorizontalSlider(new Rect(126, 26, 180, 20), CheatOptions.PlayerMovementSpeed, 1, 10);
+        CheatOptions.Instance.PlayerMovementSpeed.Value =
+            (int)GUI.HorizontalSlider(new Rect(126, 26, 180, 20), CheatOptions.Instance.PlayerMovementSpeed.Value, 1,
+                10);
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
 

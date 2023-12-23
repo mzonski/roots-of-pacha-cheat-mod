@@ -9,6 +9,6 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool FreezeTimePatch()
     {
-        return !CheatOptions.IsFreezeTimeEnabled;
+        return !CheatOptions.Instance.IsFreezeTimeEnabled.Value;
     }
 }

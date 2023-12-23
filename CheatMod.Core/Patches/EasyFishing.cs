@@ -9,7 +9,7 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool FishingFocusRisePatch(ref float __result)
     {
-        if (!CheatOptions.IsEasyFishingEnabled) return true;
+        if (!CheatOptions.Instance.IsEasyFishingEnabled.Value) return true;
         __result = 1000f;
         return false;
     }
@@ -18,7 +18,7 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool FishingSpawnBuffPatch(ref float __result)
     {
-        if (!CheatOptions.IsEasyFishingEnabled) return true;
+        if (!CheatOptions.Instance.IsEasyFishingEnabled.Value) return true;
         __result = 1000f;
         return false;
     }
@@ -26,7 +26,7 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool FishingCatchBuffPatch(ref float __result)
     {
-        if (!CheatOptions.IsEasyFishingEnabled) return true;
+        if (!CheatOptions.Instance.IsEasyFishingEnabled.Value) return true;
         __result = 1000f;
         return false;
     }
@@ -34,7 +34,7 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool FishingRarityBuffPatch(ref float __result)
     {
-        if (!CheatOptions.IsEasyFishingEnabled) return true;
+        if (!CheatOptions.Instance.IsEasyFishingEnabled.Value) return true;
         __result = 1000f;
         return false;
     }
@@ -42,7 +42,7 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool FishingRarityBuffPatch(ref int __result)
     {
-        if (!CheatOptions.IsEasyFishingEnabled) return true;
+        if (!CheatOptions.Instance.IsEasyFishingEnabled.Value) return true;
         __result = 1;
         return false;
     }

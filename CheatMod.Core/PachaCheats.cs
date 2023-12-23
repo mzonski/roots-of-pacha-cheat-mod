@@ -137,7 +137,7 @@ public class PachaCheats
 
         levelProperty.SetValue(plantEntity, 2);
         plantEntity.Withered = false;
-        if (CheatOptions.IsInfiniteHarvestEnabled)
+        if (CheatOptions.Instance.IsInfiniteHarvestEnabled.Value)
             lastHarvestedProperty.SetValue(plantEntity,
                 null);
 
@@ -236,7 +236,7 @@ public class PachaCheats
 
                 var currentSeason = new YearSeasonDay(currentDay).Season;
                 renderer.UpdateFromData(treeEntity.Tree, treeEntity.Tree.StageIndexAt(treeEntity.Tree.MatureAge),
-                    currentSeason, CheatOptions.IsInfiniteHarvestEnabled ? treeEntity.Tree.DaysInFlower + 1 : 0, false,
+                    currentSeason, CheatOptions.Instance.IsInfiniteHarvestEnabled.Value ? treeEntity.Tree.DaysInFlower + 1 : 0, false,
                     true);
 
                 treeEntity.StartFlowerIn = 0;

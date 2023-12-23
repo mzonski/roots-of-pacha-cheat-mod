@@ -9,13 +9,8 @@ public class TimeManagerWindow : PachaCheatWindow
 {
     private int _timeOffset = 420;
     private Rect _timeManagerWindow = new(16, 550, 300, 90);
-
-    public TimeManagerWindow(PachaManager manager) : base(manager)
-    {
-    }
-
     private TimeSpan SelectedTime { get; set; } = TimeSpan.FromMinutes(420);
-
+    
     private int TimeOffset
     {
         get => _timeOffset;
@@ -27,31 +22,29 @@ public class TimeManagerWindow : PachaCheatWindow
             SelectedTime = TimeSpan.FromMinutes(value + 6 * 60);
         }
     }
-
+    
     private bool FreezeTimeEnabled
     {
-        get => CheatOptions.IsFreezeTimeEnabled;
+        get => CheatOptions.Instance.IsFreezeTimeEnabled.Value;
         set
         {
-            if (CheatOptions.IsFreezeTimeEnabled && !value) // on disable
+            if (CheatOptions.Instance.IsFreezeTimeEnabled.Value && !value)
                 Manager.PachaCheats.SetTime(TimeSpan.FromHours(6));
 
-            if (value != CheatOptions.IsFreezeTimeEnabled) CheatOptions.IsFreezeTimeEnabled = value;
+            if (value != CheatOptions.Instance.IsFreezeTimeEnabled.Value) CheatOptions.Instance.IsFreezeTimeEnabled.Value = value;
         }
     }
-
-    private void SetInGameTime()
+    
+    public TimeManagerWindow(PachaManager manager) : base(manager)
     {
-        var nc = GameObject.FindObjectOfType<NotificationController>();
-        nc.ShowNotification(new Notification
-        {
-            ID = Guid.NewGuid().ToBase64String(),
-            Description = $"Time set to: {SelectedTime.Hours:00}:{SelectedTime.Minutes:00}"
-        });
-
-        Manager.PachaCheats.SetTime(SelectedTime);
     }
-
+    
+    public override void Draw()
+    {
+        if (!CheatOptions.Instance.DrawTimeManagerWindow.Value) return;
+        _timeManagerWindow = GUILayout.Window(CheatWindowType.TimeManager, _timeManagerWindow, DrawWindow, "Time Manager");
+    }
+    
     protected override void DrawWindow(int windowId)
     {
         GUILayout.BeginVertical();
@@ -75,9 +68,15 @@ public class TimeManagerWindow : PachaCheatWindow
         GUI.DragWindow();
     }
 
-    public override void Draw()
+    private void SetInGameTime()
     {
-        if (!CheatOptions.DrawTimeManagerWindow) return;
-        _timeManagerWindow = GUILayout.Window(CheatWindowType.TimeManager, _timeManagerWindow, DrawWindow, "Pacha Time Manager");
+        var nc = GameObject.FindObjectOfType<NotificationController>();
+        nc.ShowNotification(new Notification
+        {
+            ID = Guid.NewGuid().ToBase64String(),
+            Description = $"Time set to: {SelectedTime.Hours:00}:{SelectedTime.Minutes:00}"
+        });
+
+        Manager.PachaCheats.SetTime(SelectedTime);
     }
 }

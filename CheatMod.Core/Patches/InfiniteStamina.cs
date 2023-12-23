@@ -9,7 +9,7 @@ public partial class CheatModPatches
     [HarmonyPrefix]
     private static bool InfiniteStaminaPatch(PlayerStateController __instance)
     {
-        if (CheatOptions.IsInfiniteStaminaEnabled)
+        if (CheatOptions.Instance.IsInfiniteStaminaEnabled.Value)
             __instance.PlayerEntity.Stats.SetStamina(__instance.PlayerEntity.Stats.MaxStamina);
 
         return true;

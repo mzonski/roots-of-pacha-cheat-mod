@@ -23,7 +23,7 @@ public class AnimalShuffleWindow : PachaCheatWindow
     
     public override void Draw()
     {
-        if (!CheatOptions.DrawAnimalShuffleWindow) return;
+        if (!CheatOptions.Instance.DrawAnimalShuffleWindow.Value) return;
         _shuffleAnimalsWindow = GUILayout.Window(CheatWindowType.ShuffleAnimals, _shuffleAnimalsWindow,
             DrawWindow, "Animal herd shuffler");
     }
