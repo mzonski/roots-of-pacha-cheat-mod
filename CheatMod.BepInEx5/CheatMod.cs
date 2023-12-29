@@ -13,9 +13,7 @@ public class CheatMod : BaseUnityPlugin
 
     public CheatMod()
     {
-        var harmony = new CheatModHarmony();
-        _pachaManager = new PachaManager(new PachaItemDb(), new ModLogger(), harmony);
-        harmony.ApplyPatches();
+        _pachaManager = new PachaManager(new PachaItemDb(), new ModLogger());
     }
 
     private void Awake()

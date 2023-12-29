@@ -12,11 +12,6 @@ public sealed class SettingEntry<T>
         _value = defaultValue;
     }
 
-    public void SetSilent(T value)
-    {
-        _value = value;
-    }
-
     public T Value
     {
         get => _value;
