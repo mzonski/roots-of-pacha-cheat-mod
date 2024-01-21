@@ -1,4 +1,4 @@
-﻿using CheatMod.Core.Services;
+﻿using CheatMod.Core.Utils;
 using MelonLoader;
 
 namespace CheatMod.MelonLoader;

@@ -1,5 +1,7 @@
 using System;
+using CheatMod.Core.CheatCommands.SetTime;
 using CheatMod.Core.Extensions;
+using CheatMod.Core.Managers;
 using SodaDen.Pacha;
 using UnityEngine;
 
@@ -10,7 +12,7 @@ public class TimeManagerWindow : PachaCheatWindow
     private int _timeOffset = 420;
     private Rect _timeManagerWindow = new(16, 550, 300, 90);
     private TimeSpan SelectedTime { get; set; } = TimeSpan.FromMinutes(420);
-    
+
     private int TimeOffset
     {
         get => _timeOffset;
@@ -22,29 +24,31 @@ public class TimeManagerWindow : PachaCheatWindow
             SelectedTime = TimeSpan.FromMinutes(value + 6 * 60);
         }
     }
-    
+
     private bool FreezeTimeEnabled
     {
         get => CheatOptions.Instance.IsFreezeTimeEnabled.Value;
         set
         {
             if (CheatOptions.Instance.IsFreezeTimeEnabled.Value && !value)
-                Manager.PachaCheats.SetTime(TimeSpan.FromHours(6));
+                Manager.Mediator.Execute(new SetTimeCommand { Time = TimeSpan.FromHours(6) });
 
-            if (value != CheatOptions.Instance.IsFreezeTimeEnabled.Value) CheatOptions.Instance.IsFreezeTimeEnabled.Value = value;
+            if (value != CheatOptions.Instance.IsFreezeTimeEnabled.Value)
+                CheatOptions.Instance.IsFreezeTimeEnabled.Value = value;
         }
     }
-    
+
     public TimeManagerWindow(PachaManager manager) : base(manager)
     {
     }
-    
+
     public override void Draw()
     {
         if (!CheatOptions.Instance.DrawTimeManagerWindow.Value) return;
-        _timeManagerWindow = GUILayout.Window(CheatWindowType.TimeManager, _timeManagerWindow, DrawWindow, "Time Manager");
+        _timeManagerWindow =
+            GUILayout.Window(CheatWindowType.TimeManager, _timeManagerWindow, DrawWindow, "Time Manager");
     }
-    
+
     protected override void DrawWindow(int windowId)
     {
         GUILayout.BeginVertical();
@@ -77,6 +81,6 @@ public class TimeManagerWindow : PachaCheatWindow
             Description = $"Time set to: {SelectedTime.Hours:00}:{SelectedTime.Minutes:00}"
         });
 
-        Manager.PachaCheats.SetTime(SelectedTime);
+        Manager.Mediator.Execute(new SetTimeCommand { Time = SelectedTime });
     }
 }

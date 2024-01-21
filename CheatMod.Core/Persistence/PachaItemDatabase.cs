@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using SodaDen.Pacha;
 
-namespace CheatMod.Core;
+namespace CheatMod.Core.Persistence;
 
-public class PachaItemDb
+public class PachaItemDatabase
 {
     public readonly List<InventoryItem> InventoryItems = new();
 
@@ -24,7 +24,7 @@ public class PachaItemDb
 
         for (short i = 0; i < short.MaxValue; i++)
         {
-            var we = Database.Instance[i];
+            var we = SodaDen.Pacha.Database.Instance[i];
             if (we == null) continue;
 
             if (we is InventoryItem item) inventoryItems.Add(item);

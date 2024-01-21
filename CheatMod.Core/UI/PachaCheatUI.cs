@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CheatMod.Core.Managers;
 using CheatMod.Core.UI.Windows;
 
 namespace CheatMod.Core.UI;

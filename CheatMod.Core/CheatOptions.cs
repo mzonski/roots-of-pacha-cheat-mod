@@ -49,7 +49,7 @@ public class CheatOptions
             if (eventInfo is null || settingEntry is null) continue;
 
             var delegateType = eventInfo.EventHandlerType;
-            var handlerMethod = GetType().GetMethod("OnConfigChanged", BindingFlags.NonPublic | BindingFlags.Instance);
+            var handlerMethod = GetType().GetMethod(nameof(OnConfigChanged)/*"OnConfigChanged"*/, BindingFlags.NonPublic | BindingFlags.Instance);
             var delegateInstance = Delegate.CreateDelegate(delegateType, this, handlerMethod!);
             eventInfo.AddEventHandler(settingEntry, delegateInstance);
         }

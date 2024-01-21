@@ -1,7 +1,7 @@
 ﻿using CheatMod.Core.Patches;
 using HarmonyLib;
 
-namespace CheatMod.Core.Services;
+namespace CheatMod.Core.Cheats;
 
 public class CheatModHarmony : Harmony
 {

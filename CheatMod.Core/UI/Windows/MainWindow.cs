@@ -1,3 +1,7 @@
+using CheatMod.Core.CheatCommands.GrowCrops;
+using CheatMod.Core.CheatCommands.GrowTrees;
+using CheatMod.Core.CheatCommands.WaterAllTiles;
+using CheatMod.Core.Managers;
 using UnityEngine;
 
 namespace CheatMod.Core.UI.Windows;
@@ -41,13 +45,13 @@ public class MainWindow : PachaCheatWindow
         GUILayout.Space(20);
 
         if (GUILayout.Button("Water all crops"))
-            Manager.PachaCheats.WaterAllTilledTiles();
-
+            Manager.Mediator.Execute(new WaterAllTilesCommand());
+        
         if (GUILayout.Button("Grow crops around"))
-            Manager.PachaCheats.GrowCrops(9f);
+            Manager.Mediator.Execute(new GrowCropsCommand { Range = 9f});
 
         if (GUILayout.Button("Grow trees around"))
-            Manager.PachaCheats.GrowTrees(9f);
+            Manager.Mediator.Execute(new GrowTreesCommand { Range = 9f});
 
         GUILayout.Space(20);
 
@@ -82,7 +86,7 @@ public class MainWindow : PachaCheatWindow
             return;
         }
 
-        Manager.ItemDb.Refresh();
+        Manager.ItemDatabase.Refresh();
         CheatOptions.Instance.DrawItemSpawnerWindow.Value = true;
     }
 }

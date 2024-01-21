@@ -1,4 +1,6 @@
-﻿namespace CheatMod.Core.UI;
+﻿using CheatMod.Core.Managers;
+
+namespace CheatMod.Core.UI;
 
 public abstract class PachaCheatWindow
 {

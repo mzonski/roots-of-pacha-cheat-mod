@@ -1,4 +1,4 @@
-﻿namespace CheatMod.Core.Services;
+﻿namespace CheatMod.Core.Utils;
 
 public interface IModLogger
 {

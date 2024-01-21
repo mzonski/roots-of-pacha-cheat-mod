@@ -1,6 +1,6 @@
 ﻿using BepInEx;
 using CheatMod.Core;
-using CheatMod.Core.Services;
+using CheatMod.Core.Managers;
 using UnityEngine;
 
 namespace CheatMod.BepInEx5;
@@ -9,12 +9,7 @@ namespace CheatMod.BepInEx5;
 [BepInProcess("Roots of Pacha")]
 public class CheatMod : BaseUnityPlugin
 {
-    private readonly PachaManager _pachaManager;
-
-    public CheatMod()
-    {
-        _pachaManager = new PachaManager(new PachaItemDb(), new ModLogger());
-    }
+    private readonly PachaManager _pachaManager = new PachaManager(new ModLogger());
 
     private void Awake()
     {

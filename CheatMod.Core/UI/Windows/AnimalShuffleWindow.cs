@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using CheatMod.Core.CheatCommands.ShuffleAnimalHerd;
+using CheatMod.Core.Managers;
 using SodaDen.Pacha;
 using UnityEngine;
 
@@ -34,7 +36,7 @@ public class AnimalShuffleWindow : PachaCheatWindow
 
         SelectedRarityIndex = GUILayout.Toolbar(SelectedRarityIndex, _rarityOptions);
         SelectedSexIndex = GUILayout.Toolbar(SelectedSexIndex, _sexOptions);
-        IsAdult = GUILayout.Toggle(IsAdult, "Adult", CheatUIStyles.Toggle);;
+        IsAdult = GUILayout.Toggle(IsAdult, "Adult", CheatUIStyles.Toggle);
         
         GUILayout.Space(20);
 
@@ -51,7 +53,8 @@ public class AnimalShuffleWindow : PachaCheatWindow
         var rarity = (Rarity)int.Parse(_rarityOptions[SelectedRarityIndex].tooltip);
         var sex = (Sex)byte.Parse(_sexOptions[SelectedSexIndex].tooltip);
         Manager.Logger.Log($"Trying to spawn {Enum.GetName(typeof(Sex), sex)} {Enum.GetName(typeof(Rarity), rarity)}");
-        Manager.PachaCheats.ReplaceAnimalInHerdWithinRange(6f, rarity, sex, IsAdult);
+        Manager.Mediator.Execute(new ShuffleAnimalHerdCommand
+            { Range = 6f, IsAdult = IsAdult, Rarity = rarity, Sex = sex });
     }
     
     private static GUIContent[] CreateRarityOptions()

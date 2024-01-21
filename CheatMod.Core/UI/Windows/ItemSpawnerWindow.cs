@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CheatMod.Core.CheatCommands.AddItemToInventory;
+using CheatMod.Core.Managers;
 using SodaDen.Pacha;
 using UnityEngine;
 
@@ -18,7 +20,7 @@ public class ItemSpawnerWindow : PachaCheatWindow
     private Vector2 _scrollPosition = Vector2.zero;
     private int _selectedItemId = -1;
     private string _itemsFilterBy = string.Empty;
-    
+
     private string ItemsFilterBy
     {
         get => _itemsFilterBy;
@@ -29,13 +31,14 @@ public class ItemSpawnerWindow : PachaCheatWindow
             SetSelectedListItems();
         }
     }
+
     private int SelectedQualityIndex { get; set; }
 
     public ItemSpawnerWindow(PachaManager manager) : base(manager)
     {
         _itemQualityOptions = CreateItemQualityOptions();
     }
-    
+
     public override void Draw()
     {
         if (CheatOptions.Instance.DrawItemSpawnerWindow.Value)
@@ -84,8 +87,10 @@ public class ItemSpawnerWindow : PachaCheatWindow
             var quality = (ItemQuality)byte.Parse(_itemQualityOptions[SelectedQualityIndex].tooltip);
 
             if (GUILayout.Button("Add to inventory"))
-                Manager.PachaCheats.AddItemToInventory(short.Parse(_currentListItems[_selectedItemId].tooltip),
-                    _itemQty, quality);
+                Manager.Mediator.Execute(new AddItemToInventoryCommand
+                {
+                    ItemId = short.Parse(_currentListItems[_selectedItemId].tooltip), Qty = _itemQty, Quality = quality
+                });
         }
 
 
@@ -97,13 +102,13 @@ public class ItemSpawnerWindow : PachaCheatWindow
     private void SetSelectedListItems()
     {
         var filteredList = ItemsFilterBy is not null
-            ? Manager.ItemDb.InventoryItems.Where(ii =>
+            ? Manager.ItemDatabase.InventoryItems.Where(ii =>
                 ii.Name.ToLowerInvariant().Contains(ItemsFilterBy.ToLowerInvariant()))
             : Array.Empty<InventoryItem>();
 
         _currentListItems = filteredList.Select(ii => new GUIContent(ii.Name, ii.ID.ToString())).ToArray();
     }
-        
+
     private static GUIContent[] CreateItemQualityOptions()
     {
         var values = Enum.GetValues(typeof(ItemQuality));

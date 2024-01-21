@@ -1,5 +1,5 @@
 using BepInEx.Logging;
-using CheatMod.Core.Services;
+using CheatMod.Core.Utils;
 
 namespace CheatMod.BepInEx5;
 
